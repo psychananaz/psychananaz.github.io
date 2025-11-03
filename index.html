@@ -12,73 +12,49 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
-            color: #e4e4e7;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: #0a0a0a;
+            color: #fafafa;
+            font-family: 'Courier New', monospace;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            line-height: 1.6;
         }
 
-        .container {
-            max-width: 600px;
-            text-align: center;
-            animation: fadeIn 1s ease-in;
+        main {
+            max-width: 42rem;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
+            font-size: 3rem;
+            font-weight: normal;
+            letter-spacing: -0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        h1::before {
+            content: '> ';
+            color: #666;
         }
 
         p {
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            color: #a1a1aa;
-            margin-bottom: 2rem;
-            font-weight: 300;
+            font-size: 1rem;
+            color: #888;
+            line-height: 1.8;
         }
 
-        .accent {
-            display: inline-block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
-            margin-top: 2rem;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 1rem;
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <main>
         <h1>psychananaz</h1>
-        <p>Welcome to my corner of the web</p>
-        <div class="accent"></div>
-    </div>
+        <p>—</p>
+    </main>
 </body>
 </html>

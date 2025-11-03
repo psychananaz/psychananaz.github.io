@@ -173,8 +173,11 @@
 
         const gridSize = 50;
         let offset = 0;
+        let isAnimating = true;
 
         function drawGrid() {
+            if (!isAnimating) return;
+            
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.strokeStyle = '#0f0';
             ctx.lineWidth = 0.5;
@@ -199,6 +202,12 @@
             requestAnimationFrame(drawGrid);
         }
 
+        // Pause animation when page is not visible
+        document.addEventListener('visibilitychange', () => {
+            isAnimating = !document.hidden;
+            if (isAnimating) drawGrid();
+        });
+
         drawGrid();
 
         // Resize canvas on window resize
@@ -207,10 +216,14 @@
             canvas.height = window.innerHeight;
         });
 
-        // Interactive mouse particles
+        // Interactive mouse particles (limited to prevent memory issues)
+        let particleCount = 0;
+        const MAX_PARTICLES = 50;
+
         document.addEventListener('mousemove', (e) => {
-            // Only create particle 10% of the time to avoid too many
-            if (Math.random() > 0.9) {
+            // Only create particle 10% of the time and if under limit
+            if (Math.random() > 0.9 && particleCount < MAX_PARTICLES) {
+                particleCount++;
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = e.clientX + 'px';
@@ -220,14 +233,18 @@
                 // Remove particle after animation
                 setTimeout(() => {
                     particle.remove();
+                    particleCount--;
                 }, 1000);
             }
         });
 
         // Add click effect
         document.addEventListener('click', (e) => {
+            if (particleCount + 8 > MAX_PARTICLES) return;
+            
             for (let i = 0; i < 8; i++) {
                 setTimeout(() => {
+                    particleCount++;
                     const particle = document.createElement('div');
                     particle.className = 'particle';
                     const angle = (Math.PI * 2 * i) / 8;
@@ -238,6 +255,7 @@
 
                     setTimeout(() => {
                         particle.remove();
+                        particleCount--;
                     }, 1000);
                 }, i * 30);
             }

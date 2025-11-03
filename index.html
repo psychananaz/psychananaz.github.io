@@ -20,10 +20,33 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background grid */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
         }
 
         main {
             max-width: 42rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
         h1 {
@@ -31,6 +54,8 @@
             font-weight: normal;
             letter-spacing: -0.05em;
             margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
         }
 
         h1::before {
@@ -38,23 +63,209 @@
             color: #666;
         }
 
+        h1::after {
+            content: '';
+            position: absolute;
+            right: -0.5rem;
+            bottom: 0.2rem;
+            width: 0.7rem;
+            height: 2.2rem;
+            background: #0f0;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+
+        #typed-text {
+            display: inline;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
         p {
             font-size: 1rem;
             color: #888;
             line-height: 1.8;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2s forwards;
+            transition: color 0.3s ease;
+        }
+
+        p:hover {
+            color: #0f0;
+            cursor: default;
+        }
+
+        /* Interactive particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #0f0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            animation: particleFade 1s ease-out forwards;
+        }
+
+        @keyframes particleFade {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
         }
 
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
+            
+            h1::after {
+                width: 0.5rem;
+                height: 1.5rem;
+                bottom: 0.1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <canvas id="bg-canvas"></canvas>
     <main>
-        <h1>psychananaz</h1>
+        <h1><span id="typed-text"></span></h1>
         <p>—</p>
     </main>
+
+    <script>
+        // Typewriter effect
+        const text = 'psychananaz';
+        const typedTextElement = document.getElementById('typed-text');
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < text.length) {
+                typedTextElement.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        // Start typewriter after a short delay
+        setTimeout(typeWriter, 500);
+
+        // Animated background grid
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const gridSize = 50;
+        let offset = 0;
+        let isAnimating = true;
+
+        function drawGrid() {
+            if (!isAnimating) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#0f0';
+            ctx.lineWidth = 0.5;
+
+            // Vertical lines
+            for (let x = offset; x < canvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            // Horizontal lines
+            for (let y = offset; y < canvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+
+            offset = (offset + 0.5) % gridSize;
+            requestAnimationFrame(drawGrid);
+        }
+
+        // Pause animation when page is not visible
+        document.addEventListener('visibilitychange', () => {
+            isAnimating = !document.hidden;
+            if (isAnimating) drawGrid();
+        });
+
+        drawGrid();
+
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Interactive mouse particles (limited to prevent memory issues)
+        let particleCount = 0;
+        const MAX_PARTICLES = 50;
+        let lastParticleTime = 0;
+        const PARTICLE_THROTTLE = 50; // ms between particles
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            // Only create particle if enough time has passed and under limit
+            if (now - lastParticleTime > PARTICLE_THROTTLE && particleCount < MAX_PARTICLES && Math.random() > 0.9) {
+                lastParticleTime = now;
+                particleCount++;
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                document.body.appendChild(particle);
+
+                // Remove particle after animation
+                setTimeout(() => {
+                    particle.remove();
+                    particleCount--;
+                }, 1000);
+            }
+        });
+
+        // Add click effect
+        const CLICK_BURST_COUNT = 8;
+        
+        document.addEventListener('click', (e) => {
+            if (particleCount + CLICK_BURST_COUNT > MAX_PARTICLES) return;
+            
+            for (let i = 0; i < CLICK_BURST_COUNT; i++) {
+                setTimeout(() => {
+                    particleCount++;
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    const angle = (Math.PI * 2 * i) / CLICK_BURST_COUNT;
+                    const distance = 30;
+                    particle.style.left = (e.clientX + Math.cos(angle) * distance) + 'px';
+                    particle.style.top = (e.clientY + Math.sin(angle) * distance) + 'px';
+                    document.body.appendChild(particle);
+
+                    setTimeout(() => {
+                        particle.remove();
+                        particleCount--;
+                    }, 1000);
+                }, i * 30);
+            }
+        });
+    </script>
 </body>
 </html>

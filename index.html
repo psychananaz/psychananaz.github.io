@@ -62,36 +62,21 @@
     }
 
     .tagline {
-      font-size: 1.125rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
-
-    .bio {
       font-size: 1.05rem;
-      color: var(--text);
-      line-height: 1.7;
-      margin-bottom: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
     }
 
     .section {
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
       animation: fadeInUp 0.6s ease-out;
       animation-fill-mode: both;
     }
 
-    .section:nth-child(2) { animation-delay: 0.1s; }
-    .section:nth-child(3) { animation-delay: 0.2s; }
-    .section:nth-child(4) { animation-delay: 0.3s; }
-
-    .section-title {
-      font-size: 0.875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+    .section:nth-child(4) { animation-delay: 0.4s; }
 
     .dropdown {
       background: var(--surface);
@@ -152,12 +137,12 @@
     .dropdown-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
+      transition: max-height 0.4s ease, padding 0.4s ease;
       padding: 0 1.25rem;
     }
 
     .dropdown.open .dropdown-content {
-      max-height: 500px;
+      max-height: 1000px;
       padding: 0 1.25rem 1rem 1.25rem;
     }
 
@@ -184,23 +169,96 @@
       font-size: 0.9rem;
     }
 
+    .detail-text {
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      padding: 0.5rem 0;
+    }
+
+    /* Sub-dropdown styles */
+    .sub-dropdown {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin: 0.5rem 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sub-dropdown:hover {
+      border-color: var(--accent-dim);
+    }
+
+    .sub-dropdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+
+    .sub-dropdown-header:hover {
+      background: var(--surface-hover);
+    }
+
+    .sub-dropdown-title {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sub-dropdown-icon {
+      font-size: 1rem;
+      color: var(--success);
+    }
+
+    .sub-dropdown-chevron {
+      color: var(--text-muted);
+      transition: transform 0.3s ease;
+      font-size: 0.75rem;
+    }
+
+    .sub-dropdown.open .sub-dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    .sub-dropdown-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 1rem;
+    }
+
+    .sub-dropdown.open .sub-dropdown-content {
+      max-height: 500px;
+      padding: 0 1rem 0.75rem 1rem;
+    }
+
     .links {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
+      padding: 1rem 1.25rem;
     }
 
     .link {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.75rem 1.25rem;
-      background: var(--surface);
+      padding: 0.6rem 1rem;
+      background: var(--code-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       color: var(--text);
       text-decoration: none;
       font-weight: 500;
+      font-size: 0.9rem;
       transition: all 0.2s ease;
     }
 
@@ -215,30 +273,17 @@
     }
 
     .link-icon {
-      font-size: 1.125rem;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      font-size: 0.875rem;
-      color: var(--success);
-      font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
-      margin-right: 0.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1rem;
     }
 
     .footer {
-      margin-top: 3rem;
+      margin-top: 2rem;
       padding-top: 2rem;
       border-top: 1px solid var(--border);
       text-align: center;
       color: var(--text-muted);
       font-size: 0.875rem;
-      animation: fadeIn 0.6s ease-out 0.4s both;
+      animation: fadeIn 0.6s ease-out 0.5s both;
     }
 
     @keyframes fadeInUp {
@@ -282,96 +327,274 @@
   <div class="container">
     <header class="header">
       <h1 class="name">psychananaz</h1>
-      <p class="tagline">hobbyist developer / open source contributor</p>
-      <p class="bio">
-        I use Arch with niri as my daily driver. Most of my time goes into contributing to open source
-        projects. My own stuff is usually just personal experiments or hobby projects, though sometimes
-        I work on something a bit more ambitious.
-      </p>
+      <p class="tagline">Arch user, open source contributor, hobbyist developer.</p>
     </header>
 
     <main>
       <section class="section">
-        <h2 class="section-title">System</h2>
-
         <div class="dropdown" onclick="toggleDropdown(this)">
           <div class="dropdown-header">
             <span class="dropdown-title">
-              <span class="dropdown-icon">🐧</span>
-              <span>Operating System</span>
+              <span class="dropdown-icon">👤</span>
+              <span>About</span>
             </span>
             <span class="dropdown-chevron">▼</span>
           </div>
           <div class="dropdown-content">
-            <div class="dropdown-detail">
-              <span class="detail-label">Distribution</span>
-              <span class="detail-value">Arch Linux</span>
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">→</span>
+                  <span>What I Do</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <p class="detail-text">
+                  Most of my time goes into contributing to open source projects. My own work is usually
+                  just personal experiments or hobby projects, though sometimes I work on something more ambitious.
+                </p>
+              </div>
             </div>
-            <div class="dropdown-detail">
-              <span class="detail-label">Philosophy</span>
-              <span class="detail-value">KISS, Rolling Release</span>
-            </div>
-            <div class="dropdown-detail">
-              <span class="detail-label">Package Manager</span>
-              <span class="detail-value">pacman</span>
-            </div>
-            <div class="dropdown-detail">
-              <span class="detail-label">Why Arch?</span>
-              <span class="detail-value">Control, Simplicity, AUR</span>
-            </div>
-          </div>
-        </div>
 
-        <div class="dropdown" onclick="toggleDropdown(this)">
-          <div class="dropdown-header">
-            <span class="dropdown-title">
-              <span class="dropdown-icon">🪟</span>
-              <span>Window Manager</span>
-            </span>
-            <span class="dropdown-chevron">▼</span>
-          </div>
-          <div class="dropdown-content">
-            <div class="dropdown-detail">
-              <span class="detail-label">WM</span>
-              <span class="detail-value">niri</span>
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">→</span>
+                  <span>Philosophy</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <div class="dropdown-detail">
+                  <span class="detail-label">Code</span>
+                  <span class="detail-value">Simple, maintainable</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Tools</span>
+                  <span class="detail-value">Open source, customizable</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Approach</span>
+                  <span class="detail-value">Learn by doing</span>
+                </div>
+              </div>
             </div>
-            <div class="dropdown-detail">
-              <span class="detail-label">Type</span>
-              <span class="detail-value">Scrollable Tiling</span>
-            </div>
-            <div class="dropdown-detail">
-              <span class="detail-label">Compositor</span>
-              <span class="detail-value">Wayland-native</span>
-            </div>
-            <div class="dropdown-detail">
-              <span class="detail-label">Language</span>
-              <span class="detail-value">Rust</span>
-            </div>
-            <div class="dropdown-detail">
-              <span class="detail-label">Why niri?</span>
-              <span class="detail-value">Unique workflow, smooth animations</span>
+
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">→</span>
+                  <span>Interests</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <div class="dropdown-detail">
+                  <span class="detail-label">Primary</span>
+                  <span class="detail-value">Linux, Wayland, Open Source</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Learning</span>
+                  <span class="detail-value">Rust, Systems Programming</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Tinkering</span>
+                  <span class="detail-value">WMs, Dotfiles, Ricing</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section class="section">
-        <h2 class="section-title">Focus</h2>
-        <div style="line-height: 2;">
-          <span class="badge">open source</span>
-          <span class="badge">contributions</span>
-          <span class="badge">hobby projects</span>
-          <span class="badge">experimentation</span>
+        <div class="dropdown" onclick="toggleDropdown(this)">
+          <div class="dropdown-header">
+            <span class="dropdown-title">
+              <span class="dropdown-icon">💻</span>
+              <span>System</span>
+            </span>
+            <span class="dropdown-chevron">▼</span>
+          </div>
+          <div class="dropdown-content">
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">🐧</span>
+                  <span>Operating System</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <div class="dropdown-detail">
+                  <span class="detail-label">Distribution</span>
+                  <span class="detail-value">Arch Linux</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Philosophy</span>
+                  <span class="detail-value">KISS, Rolling Release</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Package Manager</span>
+                  <span class="detail-value">pacman, yay</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Why Arch?</span>
+                  <span class="detail-value">Control, AUR, Minimalism</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">🪟</span>
+                  <span>Window Manager</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <div class="dropdown-detail">
+                  <span class="detail-label">WM</span>
+                  <span class="detail-value">niri</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Type</span>
+                  <span class="detail-value">Scrollable Tiling</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Compositor</span>
+                  <span class="detail-value">Wayland-native</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Language</span>
+                  <span class="detail-value">Rust</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Why niri?</span>
+                  <span class="detail-value">Unique workflow, smooth</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">⚙️</span>
+                  <span>Tools & Setup</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <div class="dropdown-detail">
+                  <span class="detail-label">Terminal</span>
+                  <span class="detail-value">alacritty / kitty</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Shell</span>
+                  <span class="detail-value">zsh / fish</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Editor</span>
+                  <span class="detail-value">neovim</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Dotfiles</span>
+                  <span class="detail-value">git-managed</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="section">
-        <h2 class="section-title">Connect</h2>
-        <div class="links">
-          <a href="https://github.com/psychananaz" class="link" target="_blank" rel="noopener noreferrer">
-            <span class="link-icon">→</span>
-            <span>GitHub</span>
-          </a>
+        <div class="dropdown" onclick="toggleDropdown(this)">
+          <div class="dropdown-header">
+            <span class="dropdown-title">
+              <span class="dropdown-icon">🛠️</span>
+              <span>Development</span>
+            </span>
+            <span class="dropdown-chevron">▼</span>
+          </div>
+          <div class="dropdown-content">
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">📝</span>
+                  <span>Languages & Tech</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <div class="dropdown-detail">
+                  <span class="detail-label">Learning</span>
+                  <span class="detail-value">Rust, C</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Comfortable</span>
+                  <span class="detail-value">Python, Shell scripting</span>
+                </div>
+                <div class="dropdown-detail">
+                  <span class="detail-label">Familiar</span>
+                  <span class="detail-value">JavaScript, Go</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">🤝</span>
+                  <span>Contributions</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <p class="detail-text">
+                  Contribute to various open source projects when I find bugs, have ideas for improvements,
+                  or want to add features I need. Mostly focused on Linux desktop tools and utilities.
+                </p>
+              </div>
+            </div>
+
+            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
+              <div class="sub-dropdown-header">
+                <span class="sub-dropdown-title">
+                  <span class="sub-dropdown-icon">🚀</span>
+                  <span>Personal Projects</span>
+                </span>
+                <span class="sub-dropdown-chevron">▼</span>
+              </div>
+              <div class="sub-dropdown-content">
+                <p class="detail-text">
+                  Usually small utilities and scripts for personal use. Occasionally work on something
+                  larger, but most projects stay experimental or just solve problems I have.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="dropdown" onclick="toggleDropdown(this)">
+          <div class="dropdown-header">
+            <span class="dropdown-title">
+              <span class="dropdown-icon">🔗</span>
+              <span>Links</span>
+            </span>
+            <span class="dropdown-chevron">▼</span>
+          </div>
+          <div class="dropdown-content">
+            <div class="links">
+              <a href="https://github.com/psychananaz" class="link" target="_blank" rel="noopener noreferrer">
+                <span class="link-icon">→</span>
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -386,7 +609,12 @@
       element.classList.toggle('open');
     }
 
-    // Optional: Close dropdowns when clicking outside
+    function toggleSubDropdown(event, element) {
+      event.stopPropagation();
+      element.classList.toggle('open');
+    }
+
+    // Close dropdowns when clicking outside
     document.addEventListener('click', function(event) {
       if (!event.target.closest('.dropdown')) {
         document.querySelectorAll('.dropdown.open').forEach(dropdown => {

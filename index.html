@@ -3,15 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
   <title>psychananaz</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Arch Linux user, open source contributor, and hobbyist developer focused on Linux, Rust, and Wayland." />
+  <meta name="keywords" content="psychananaz, developer, arch linux, open source, rust, wayland, linux" />
+  <meta name="author" content="psychananaz" />
+  <link rel="canonical" href="https://psychananaz.dev" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="psychananaz" />
+  <meta property="og:description" content="Arch user, open source contributor, hobbyist developer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://psychananaz.dev" />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://github.com" />
+
+  <style>
+    /* ============================================
+       CSS Variables / Design Tokens
+       ============================================ */
     :root {
+      /* Colors */
       --bg: #0a0a0a;
       --surface: #1a1a1a;
       --surface-hover: #252525;
@@ -22,6 +37,39 @@
       --accent-dim: #0099bb;
       --code-bg: #151515;
       --success: #00ff88;
+
+      /* Spacing Scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+
+      /* Typography Scale */
+      --font-xs: 0.75rem;
+      --font-sm: 0.875rem;
+      --font-base: 1rem;
+      --font-lg: 1.05rem;
+      --font-xl: 1.25rem;
+
+      /* Transitions */
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
+      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Borders */
+      --radius-sm: 6px;
+      --radius-md: 8px;
+    }
+
+    /* ============================================
+       Reset & Base Styles
+       ============================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     html {
@@ -37,16 +85,40 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: var(--space-xl) var(--space-md);
     }
 
+    /* ============================================
+       Accessibility: Skip Link
+       ============================================ */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-md);
+      background: var(--accent);
+      color: var(--bg);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      text-decoration: none;
+      z-index: 1000;
+      transition: top var(--transition-fast);
+    }
+
+    .skip-link:focus {
+      top: var(--space-md);
+    }
+
+    /* ============================================
+       Layout
+       ============================================ */
     .container {
       max-width: 700px;
       width: 100%;
     }
 
     .header {
-      margin-bottom: 3rem;
+      margin-bottom: var(--space-2xl);
       animation: fadeInUp 0.6s ease-out;
     }
 
@@ -58,17 +130,20 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--space-sm);
     }
 
     .tagline {
-      font-size: 1.05rem;
+      font-size: var(--font-lg);
       color: var(--text-muted);
       margin-bottom: 0;
     }
 
+    /* ============================================
+       Sections & Animation Delays
+       ============================================ */
     .section {
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--space-lg);
       animation: fadeInUp 0.6s ease-out;
       animation-fill-mode: both;
     }
@@ -78,40 +153,103 @@
     .section:nth-child(3) { animation-delay: 0.3s; }
     .section:nth-child(4) { animation-delay: 0.4s; }
 
-    .dropdown {
-      background: var(--surface);
+    /* ============================================
+       Dropdown Components (Shared Styles)
+       ============================================ */
+    .dropdown,
+    .sub-dropdown {
       border: 1px solid var(--border);
-      border-radius: 8px;
-      margin-bottom: 0.75rem;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: all var(--transition-normal);
     }
 
-    .dropdown:hover {
+    .dropdown:hover,
+    .sub-dropdown:hover {
       border-color: var(--accent-dim);
     }
 
-    .dropdown-header {
+    .dropdown-header,
+    .sub-dropdown-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.25rem;
       cursor: pointer;
       user-select: none;
-      transition: background 0.2s ease;
+      transition: background var(--transition-fast);
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
     }
 
-    .dropdown-header:hover {
+    .dropdown-header:hover,
+    .sub-dropdown-header:hover {
       background: var(--surface-hover);
     }
 
-    .dropdown-header:active {
+    .dropdown-header:active,
+    .sub-dropdown-header:active {
       background: var(--border);
+    }
+
+    /* Focus styles for accessibility */
+    .dropdown-header:focus-visible,
+    .sub-dropdown-header:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    .dropdown-chevron,
+    .sub-dropdown-chevron {
+      color: var(--text-muted);
+      transition: transform var(--transition-smooth);
+    }
+
+    .dropdown.open .dropdown-chevron,
+    .sub-dropdown.open .sub-dropdown-chevron {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content,
+    .sub-dropdown-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--transition-normal);
+    }
+
+    .dropdown.open .dropdown-content,
+    .sub-dropdown.open .sub-dropdown-content {
+      grid-template-rows: 1fr;
+    }
+
+    .dropdown-content > .content-inner,
+    .sub-dropdown-content > .content-inner {
+      overflow: hidden;
+    }
+
+    /* ============================================
+       Main Dropdown Specific Styles
+       ============================================ */
+    .dropdown {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.75rem;
+    }
+
+    .dropdown.open {
+      box-shadow: 0 4px 12px rgba(0, 217, 255, 0.1);
+    }
+
+    .dropdown-header {
+      padding: var(--space-md) var(--space-lg);
+      font-size: var(--font-base);
     }
 
     .dropdown-title {
       font-weight: 500;
-      font-size: 1rem;
+      font-size: var(--font-base);
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -119,37 +257,70 @@
 
     .dropdown-icon {
       font-family: monospace;
-      font-size: 1.25rem;
+      font-size: var(--font-xl);
       color: var(--accent);
       min-width: 1.5rem;
     }
 
     .dropdown-chevron {
-      color: var(--text-muted);
-      transition: transform 0.3s ease;
-      font-size: 0.875rem;
+      font-size: var(--font-sm);
     }
 
-    .dropdown.open .dropdown-chevron {
-      transform: rotate(180deg);
+    .dropdown-content > .content-inner {
+      padding: 0 var(--space-lg);
     }
 
-    .dropdown-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-      padding: 0 1.25rem;
+    .dropdown.open .dropdown-content > .content-inner {
+      padding-bottom: var(--space-md);
     }
 
-    .dropdown.open .dropdown-content {
-      max-height: 1000px;
-      padding: 0 1.25rem 1rem 1.25rem;
+    /* ============================================
+       Sub-Dropdown Specific Styles
+       ============================================ */
+    .sub-dropdown {
+      background: var(--code-bg);
+      border-radius: var(--radius-sm);
+      margin: var(--space-sm) 0;
     }
 
+    .sub-dropdown-header {
+      padding: 0.75rem var(--space-md);
+      font-size: var(--font-sm);
+    }
+
+    .sub-dropdown-title {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .sub-dropdown-icon {
+      font-size: var(--font-base);
+      color: var(--success);
+    }
+
+    .sub-dropdown-chevron {
+      font-size: var(--font-xs);
+    }
+
+    .sub-dropdown-content > .content-inner {
+      padding: 0 var(--space-md);
+    }
+
+    .sub-dropdown.open .sub-dropdown-content > .content-inner {
+      padding-bottom: 0.75rem;
+    }
+
+    /* ============================================
+       Detail Components
+       ============================================ */
     .dropdown-detail {
       display: flex;
       justify-content: space-between;
-      padding: 0.5rem 0;
+      padding: var(--space-sm) 0;
       border-bottom: 1px solid var(--border);
       font-size: 0.95rem;
     }
@@ -173,93 +344,32 @@
       color: var(--text);
       font-size: 0.95rem;
       line-height: 1.6;
-      padding: 0.5rem 0;
+      padding: var(--space-sm) 0;
     }
 
-    /* Sub-dropdown styles */
-    .sub-dropdown {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      margin: 0.5rem 0;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .sub-dropdown:hover {
-      border-color: var(--accent-dim);
-    }
-
-    .sub-dropdown-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 1rem;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.2s ease;
-    }
-
-    .sub-dropdown-header:hover {
-      background: var(--surface-hover);
-    }
-
-    .sub-dropdown-title {
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .sub-dropdown-icon {
-      font-size: 1rem;
-      color: var(--success);
-    }
-
-    .sub-dropdown-chevron {
-      color: var(--text-muted);
-      transition: transform 0.3s ease;
-      font-size: 0.75rem;
-    }
-
-    .sub-dropdown.open .sub-dropdown-chevron {
-      transform: rotate(180deg);
-    }
-
-    .sub-dropdown-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      padding: 0 1rem;
-    }
-
-    .sub-dropdown.open .sub-dropdown-content {
-      max-height: 500px;
-      padding: 0 1rem 0.75rem 1rem;
-    }
-
+    /* ============================================
+       Links Component
+       ============================================ */
     .links {
       display: flex;
-      gap: 1rem;
+      gap: var(--space-md);
       flex-wrap: wrap;
-      padding: 1rem 1.25rem;
+      padding: var(--space-md) var(--space-lg);
     }
 
     .link {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1rem;
+      gap: var(--space-sm);
+      padding: 0.6rem var(--space-md);
       background: var(--code-bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       color: var(--text);
       text-decoration: none;
       font-weight: 500;
       font-size: 0.9rem;
-      transition: all 0.2s ease;
+      transition: all var(--transition-fast);
     }
 
     .link:hover {
@@ -272,20 +382,31 @@
       transform: translateY(0);
     }
 
-    .link-icon {
-      font-size: 1rem;
+    .link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
+    .link-icon {
+      font-size: var(--font-base);
+    }
+
+    /* ============================================
+       Footer
+       ============================================ */
     .footer {
-      margin-top: 2rem;
-      padding-top: 2rem;
+      margin-top: var(--space-xl);
+      padding-top: var(--space-xl);
       border-top: 1px solid var(--border);
       text-align: center;
       color: var(--text-muted);
-      font-size: 0.875rem;
+      font-size: var(--font-sm);
       animation: fadeIn 0.6s ease-out 0.5s both;
     }
 
+    /* ============================================
+       Animations
+       ============================================ */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -306,7 +427,21 @@
       }
     }
 
+    /* ============================================
+       Responsive / Mobile Styles
+       ============================================ */
     @media (max-width: 640px) {
+      /* Increase tap targets for mobile */
+      .dropdown-header {
+        padding: var(--space-lg);
+        min-height: 48px;
+      }
+
+      .sub-dropdown-header {
+        padding: var(--space-md);
+        min-height: 44px;
+      }
+
       .links {
         flex-direction: column;
       }
@@ -314,93 +449,117 @@
       .link {
         width: 100%;
         justify-content: center;
+        min-height: 44px;
       }
 
       .dropdown-detail {
         flex-direction: column;
-        gap: 0.25rem;
+        gap: var(--space-xs);
       }
     }
   </style>
 </head>
 <body>
+  <!-- Skip link for keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <div class="container">
     <header class="header">
       <h1 class="name">psychananaz</h1>
       <p class="tagline">Arch user, open source contributor, hobbyist developer.</p>
     </header>
 
-    <main>
-      <section class="section">
-        <div class="dropdown" onclick="toggleDropdown(this)">
-          <div class="dropdown-header">
+    <main id="main-content">
+      <section class="section" aria-label="About section">
+        <div class="dropdown" role="region" aria-labelledby="about-heading">
+          <button class="dropdown-header"
+                  id="about-heading"
+                  aria-expanded="false"
+                  aria-controls="about-content">
             <span class="dropdown-title">
-              <span class="dropdown-icon">👤</span>
+              <span class="dropdown-icon" aria-hidden="true">👤</span>
               <span>About</span>
             </span>
-            <span class="dropdown-chevron">▼</span>
-          </div>
-          <div class="dropdown-content">
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">→</span>
-                  <span>What I Do</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
+            <span class="dropdown-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div class="dropdown-content" id="about-content" role="region">
+            <div class="content-inner">
+              <div class="sub-dropdown" role="region" aria-labelledby="whatido-heading">
+                <button class="sub-dropdown-header"
+                        id="whatido-heading"
+                        aria-expanded="false"
+                        aria-controls="whatido-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">→</span>
+                    <span>What I Do</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="whatido-content">
+                  <div class="content-inner">
+                    <p class="detail-text">
+                      Most of my time goes into contributing to open source projects. My own work is usually
+                      just personal experiments or hobby projects, though sometimes I work on something more ambitious.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="sub-dropdown-content">
-                <p class="detail-text">
-                  Most of my time goes into contributing to open source projects. My own work is usually
-                  just personal experiments or hobby projects, though sometimes I work on something more ambitious.
-                </p>
-              </div>
-            </div>
 
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">→</span>
-                  <span>Philosophy</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
+              <div class="sub-dropdown" role="region" aria-labelledby="philosophy-heading">
+                <button class="sub-dropdown-header"
+                        id="philosophy-heading"
+                        aria-expanded="false"
+                        aria-controls="philosophy-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">→</span>
+                    <span>Philosophy</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="philosophy-content">
+                  <div class="content-inner">
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Code</span>
+                      <span class="detail-value">Simple, maintainable</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Tools</span>
+                      <span class="detail-value">Open source, customizable</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Approach</span>
+                      <span class="detail-value">Learn by doing</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="sub-dropdown-content">
-                <div class="dropdown-detail">
-                  <span class="detail-label">Code</span>
-                  <span class="detail-value">Simple, maintainable</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Tools</span>
-                  <span class="detail-value">Open source, customizable</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Approach</span>
-                  <span class="detail-value">Learn by doing</span>
-                </div>
-              </div>
-            </div>
 
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">→</span>
-                  <span>Interests</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
-              </div>
-              <div class="sub-dropdown-content">
-                <div class="dropdown-detail">
-                  <span class="detail-label">Primary</span>
-                  <span class="detail-value">Linux, Wayland, Open Source</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Learning</span>
-                  <span class="detail-value">Rust, Systems Programming</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Tinkering</span>
-                  <span class="detail-value">WMs, Dotfiles, Ricing</span>
+              <div class="sub-dropdown" role="region" aria-labelledby="interests-heading">
+                <button class="sub-dropdown-header"
+                        id="interests-heading"
+                        aria-expanded="false"
+                        aria-controls="interests-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">→</span>
+                    <span>Interests</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="interests-content">
+                  <div class="content-inner">
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Primary</span>
+                      <span class="detail-value">Linux, Wayland, Open Source</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Learning</span>
+                      <span class="detail-value">Rust, Systems Programming</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Tinkering</span>
+                      <span class="detail-value">WMs, Dotfiles, Ricing</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -408,100 +567,120 @@
         </div>
       </section>
 
-      <section class="section">
-        <div class="dropdown" onclick="toggleDropdown(this)">
-          <div class="dropdown-header">
+      <section class="section" aria-label="System section">
+        <div class="dropdown" role="region" aria-labelledby="system-heading">
+          <button class="dropdown-header"
+                  id="system-heading"
+                  aria-expanded="false"
+                  aria-controls="system-content">
             <span class="dropdown-title">
-              <span class="dropdown-icon">💻</span>
+              <span class="dropdown-icon" aria-hidden="true">💻</span>
               <span>System</span>
             </span>
-            <span class="dropdown-chevron">▼</span>
-          </div>
-          <div class="dropdown-content">
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">🐧</span>
-                  <span>Operating System</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
+            <span class="dropdown-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div class="dropdown-content" id="system-content" role="region">
+            <div class="content-inner">
+              <div class="sub-dropdown" role="region" aria-labelledby="os-heading">
+                <button class="sub-dropdown-header"
+                        id="os-heading"
+                        aria-expanded="false"
+                        aria-controls="os-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">🐧</span>
+                    <span>Operating System</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="os-content">
+                  <div class="content-inner">
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Distribution</span>
+                      <span class="detail-value">Arch Linux</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Philosophy</span>
+                      <span class="detail-value">KISS, Rolling Release</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Package Manager</span>
+                      <span class="detail-value">pacman, yay</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Why Arch?</span>
+                      <span class="detail-value">Control, AUR, Minimalism</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="sub-dropdown-content">
-                <div class="dropdown-detail">
-                  <span class="detail-label">Distribution</span>
-                  <span class="detail-value">Arch Linux</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Philosophy</span>
-                  <span class="detail-value">KISS, Rolling Release</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Package Manager</span>
-                  <span class="detail-value">pacman, yay</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Why Arch?</span>
-                  <span class="detail-value">Control, AUR, Minimalism</span>
-                </div>
-              </div>
-            </div>
 
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">🪟</span>
-                  <span>Window Manager</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
+              <div class="sub-dropdown" role="region" aria-labelledby="wm-heading">
+                <button class="sub-dropdown-header"
+                        id="wm-heading"
+                        aria-expanded="false"
+                        aria-controls="wm-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">🪟</span>
+                    <span>Window Manager</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="wm-content">
+                  <div class="content-inner">
+                    <div class="dropdown-detail">
+                      <span class="detail-label">WM</span>
+                      <span class="detail-value">niri</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Type</span>
+                      <span class="detail-value">Scrollable Tiling</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Compositor</span>
+                      <span class="detail-value">Wayland-native</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Language</span>
+                      <span class="detail-value">Rust</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Why niri?</span>
+                      <span class="detail-value">Unique workflow, smooth</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="sub-dropdown-content">
-                <div class="dropdown-detail">
-                  <span class="detail-label">WM</span>
-                  <span class="detail-value">niri</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Type</span>
-                  <span class="detail-value">Scrollable Tiling</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Compositor</span>
-                  <span class="detail-value">Wayland-native</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Language</span>
-                  <span class="detail-value">Rust</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Why niri?</span>
-                  <span class="detail-value">Unique workflow, smooth</span>
-                </div>
-              </div>
-            </div>
 
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">⚙️</span>
-                  <span>Tools & Setup</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
-              </div>
-              <div class="sub-dropdown-content">
-                <div class="dropdown-detail">
-                  <span class="detail-label">Terminal</span>
-                  <span class="detail-value">alacritty / kitty</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Shell</span>
-                  <span class="detail-value">zsh / fish</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Editor</span>
-                  <span class="detail-value">neovim</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Dotfiles</span>
-                  <span class="detail-value">git-managed</span>
+              <div class="sub-dropdown" role="region" aria-labelledby="tools-heading">
+                <button class="sub-dropdown-header"
+                        id="tools-heading"
+                        aria-expanded="false"
+                        aria-controls="tools-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">⚙️</span>
+                    <span>Tools & Setup</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="tools-content">
+                  <div class="content-inner">
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Terminal</span>
+                      <span class="detail-value">alacritty / kitty</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Shell</span>
+                      <span class="detail-value">zsh / fish</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Editor</span>
+                      <span class="detail-value">neovim</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Dotfiles</span>
+                      <span class="detail-value">git-managed</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -509,90 +688,115 @@
         </div>
       </section>
 
-      <section class="section">
-        <div class="dropdown" onclick="toggleDropdown(this)">
-          <div class="dropdown-header">
+      <section class="section" aria-label="Development section">
+        <div class="dropdown" role="region" aria-labelledby="dev-heading">
+          <button class="dropdown-header"
+                  id="dev-heading"
+                  aria-expanded="false"
+                  aria-controls="dev-content">
             <span class="dropdown-title">
-              <span class="dropdown-icon">🛠️</span>
+              <span class="dropdown-icon" aria-hidden="true">🛠️</span>
               <span>Development</span>
             </span>
-            <span class="dropdown-chevron">▼</span>
-          </div>
-          <div class="dropdown-content">
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">📝</span>
-                  <span>Languages & Tech</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
+            <span class="dropdown-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div class="dropdown-content" id="dev-content" role="region">
+            <div class="content-inner">
+              <div class="sub-dropdown" role="region" aria-labelledby="langs-heading">
+                <button class="sub-dropdown-header"
+                        id="langs-heading"
+                        aria-expanded="false"
+                        aria-controls="langs-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">📝</span>
+                    <span>Languages & Tech</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="langs-content">
+                  <div class="content-inner">
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Learning</span>
+                      <span class="detail-value">Rust, C</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Comfortable</span>
+                      <span class="detail-value">Python, Shell scripting</span>
+                    </div>
+                    <div class="dropdown-detail">
+                      <span class="detail-label">Familiar</span>
+                      <span class="detail-value">JavaScript, Go</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="sub-dropdown-content">
-                <div class="dropdown-detail">
-                  <span class="detail-label">Learning</span>
-                  <span class="detail-value">Rust, C</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Comfortable</span>
-                  <span class="detail-value">Python, Shell scripting</span>
-                </div>
-                <div class="dropdown-detail">
-                  <span class="detail-label">Familiar</span>
-                  <span class="detail-value">JavaScript, Go</span>
-                </div>
-              </div>
-            </div>
 
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">🤝</span>
-                  <span>Contributions</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
+              <div class="sub-dropdown" role="region" aria-labelledby="contrib-heading">
+                <button class="sub-dropdown-header"
+                        id="contrib-heading"
+                        aria-expanded="false"
+                        aria-controls="contrib-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">🤝</span>
+                    <span>Contributions</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="contrib-content">
+                  <div class="content-inner">
+                    <p class="detail-text">
+                      Contribute to various open source projects when I find bugs, have ideas for improvements,
+                      or want to add features I need. Mostly focused on Linux desktop tools and utilities.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="sub-dropdown-content">
-                <p class="detail-text">
-                  Contribute to various open source projects when I find bugs, have ideas for improvements,
-                  or want to add features I need. Mostly focused on Linux desktop tools and utilities.
-                </p>
-              </div>
-            </div>
 
-            <div class="sub-dropdown" onclick="toggleSubDropdown(event, this)">
-              <div class="sub-dropdown-header">
-                <span class="sub-dropdown-title">
-                  <span class="sub-dropdown-icon">🚀</span>
-                  <span>Personal Projects</span>
-                </span>
-                <span class="sub-dropdown-chevron">▼</span>
-              </div>
-              <div class="sub-dropdown-content">
-                <p class="detail-text">
-                  Usually small utilities and scripts for personal use. Occasionally work on something
-                  larger, but most projects stay experimental or just solve problems I have.
-                </p>
+              <div class="sub-dropdown" role="region" aria-labelledby="projects-heading">
+                <button class="sub-dropdown-header"
+                        id="projects-heading"
+                        aria-expanded="false"
+                        aria-controls="projects-content">
+                  <span class="sub-dropdown-title">
+                    <span class="sub-dropdown-icon" aria-hidden="true">🚀</span>
+                    <span>Personal Projects</span>
+                  </span>
+                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                </button>
+                <div class="sub-dropdown-content" id="projects-content">
+                  <div class="content-inner">
+                    <p class="detail-text">
+                      Usually small utilities and scripts for personal use. Occasionally work on something
+                      larger, but most projects stay experimental or just solve problems I have.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="dropdown" onclick="toggleDropdown(this)">
-          <div class="dropdown-header">
+      <section class="section" aria-label="Links section">
+        <div class="dropdown" role="region" aria-labelledby="links-heading">
+          <button class="dropdown-header"
+                  id="links-heading"
+                  aria-expanded="false"
+                  aria-controls="links-content">
             <span class="dropdown-title">
-              <span class="dropdown-icon">🔗</span>
+              <span class="dropdown-icon" aria-hidden="true">🔗</span>
               <span>Links</span>
             </span>
-            <span class="dropdown-chevron">▼</span>
-          </div>
-          <div class="dropdown-content">
-            <div class="links">
-              <a href="https://github.com/psychananaz" class="link" target="_blank" rel="noopener noreferrer">
-                <span class="link-icon">→</span>
-                <span>GitHub</span>
-              </a>
+            <span class="dropdown-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div class="dropdown-content" id="links-content" role="region">
+            <div class="content-inner">
+              <div class="links">
+                <a href="https://github.com/psychananaz" class="link" target="_blank" rel="noopener noreferrer">
+                  <span class="link-icon" aria-hidden="true">→</span>
+                  <span>GitHub</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -605,30 +809,81 @@
   </div>
 
   <script>
-    function toggleDropdown(element) {
-      element.classList.toggle('open');
-    }
+    // ============================================
+    // Dropdown Functionality with Event Delegation
+    // ============================================
+    (function() {
+      'use strict';
 
-    function toggleSubDropdown(event, element) {
-      event.stopPropagation();
-      element.classList.toggle('open');
-    }
+      const container = document.querySelector('.container');
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(event) {
-      if (!event.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown.open').forEach(dropdown => {
-          dropdown.classList.remove('open');
-        });
+      // Toggle dropdown open state and update ARIA
+      function toggleDropdown(dropdownEl, headerEl) {
+        const isOpen = dropdownEl.classList.toggle('open');
+        headerEl.setAttribute('aria-expanded', isOpen);
       }
-    });
 
-    // Prevent dropdown close when clicking inside
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
-      dropdown.addEventListener('click', function(event) {
-        event.stopPropagation();
+      // Event delegation for all dropdown interactions
+      container.addEventListener('click', function(event) {
+        const subHeader = event.target.closest('.sub-dropdown-header');
+        const mainHeader = event.target.closest('.dropdown-header');
+
+        if (subHeader) {
+          // Handle sub-dropdown click
+          event.stopPropagation();
+          const subDropdown = subHeader.closest('.sub-dropdown');
+          toggleDropdown(subDropdown, subHeader);
+        } else if (mainHeader) {
+          // Handle main dropdown click
+          const dropdown = mainHeader.closest('.dropdown');
+          toggleDropdown(dropdown, mainHeader);
+        }
       });
-    });
+
+      // Keyboard navigation support
+      container.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          const subHeader = event.target.closest('.sub-dropdown-header');
+          const mainHeader = event.target.closest('.dropdown-header');
+
+          if (subHeader || mainHeader) {
+            event.preventDefault();
+            event.target.click();
+          }
+        }
+
+        // Escape key closes all dropdowns
+        if (event.key === 'Escape') {
+          document.querySelectorAll('.dropdown.open, .sub-dropdown.open').forEach(function(dropdown) {
+            dropdown.classList.remove('open');
+            const header = dropdown.querySelector('.dropdown-header, .sub-dropdown-header');
+            if (header) {
+              header.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+      });
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!event.target.closest('.dropdown')) {
+          document.querySelectorAll('.dropdown.open').forEach(function(dropdown) {
+            dropdown.classList.remove('open');
+            const header = dropdown.querySelector('.dropdown-header');
+            if (header) {
+              header.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+      });
+
+      // Prevent dropdown close when clicking inside dropdown content
+      container.querySelectorAll('.dropdown').forEach(function(dropdown) {
+        dropdown.addEventListener('click', function(event) {
+          event.stopPropagation();
+        });
+      });
+    })();
   </script>
 </body>
 </html>

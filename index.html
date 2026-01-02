@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
-  <title>psychananaz</title>
+  <title>psychananaz ~ terminal</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="Arch Linux user, open source contributor, and hobbyist developer focused on Linux, Rust, and Wayland." />
@@ -21,81 +21,74 @@
   <!-- Performance -->
   <link rel="preconnect" href="https://github.com" />
 
-  <!-- Monospace Font for Tech Aesthetic -->
+  <!-- Monospace Font for Terminal Aesthetic -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================
-       CSS Variables / Design Tokens
-       ============================================ */
+    /* ================================================
+       MODERN MINIMAL DARK WITH UNIQUE AESTHETIC
+       Digital brutalism meets glitch art
+       ================================================ */
+    
     :root {
-      /* Colors */
-      --bg: #0b0d12;
-      --bg-gradient-start: #0f1219;
-      --bg-gradient-end: #0b0d12;
-      --surface: #141924;
-      --surface-hover: #1a2030;
-      --surface-active: #21293b;
-      --border: #2a3346;
-      --border-subtle: #1c2332;
-      --text: #e5e7ef;
-      --text-muted: #9aa3b2;
-      --code-bg: #101520;
-      --ink: rgba(90, 214, 255, 0.18);
-
-      /* Section Accent Colors */
-      --accent-cyan: #56d6ff;
-      --accent-cyan-dim: #2aa5c7;
-      --accent-cyan-glow: rgba(86, 214, 255, 0.18);
-
-      --accent-purple: #9a7bff;
-      --accent-purple-dim: #6f56d9;
-      --accent-purple-glow: rgba(154, 123, 255, 0.2);
-
-      --accent-orange: #f2a860;
-      --accent-orange-dim: #d8873f;
-      --accent-orange-glow: rgba(242, 168, 96, 0.18);
-
-      --accent-green: #4bdc9f;
-      --accent-green-dim: #2aa876;
-      --accent-green-glow: rgba(75, 220, 159, 0.18);
-
-      /* Legacy support */
-      --accent: var(--accent-cyan);
-      --accent-dim: var(--accent-cyan-dim);
-      --success: #4bdc9f;
-
-      /* Spacing Scale */
+      /* Pure Dark Palette */
+      --bg-void: #000000;
+      --bg-dark: #0d0d0d;
+      --bg-panel: #1a1a1a;
+      --surface: #141414;
+      
+      /* Neon Accent Palette - Electric */
+      --electric-blue: #00f0ff;
+      --electric-pink: #ff006e;
+      --electric-purple: #b537f2;
+      --electric-green: #39ff14;
+      
+      /* Main accent */
+      --accent: var(--electric-blue);
+      --accent-glow: rgba(0, 240, 255, 0.5);
+      --accent-subtle: rgba(0, 240, 255, 0.08);
+      
+      /* Secondary */
+      --secondary: var(--electric-pink);
+      --secondary-glow: rgba(255, 0, 110, 0.4);
+      
+      /* Tertiary */
+      --tertiary: var(--electric-purple);
+      --tertiary-glow: rgba(181, 55, 242, 0.4);
+      
+      /* Text */
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --text-dim: #606060;
+      
+      /* Borders */
+      --border: #2a2a2a;
+      --border-bright: #404040;
+      
+      /* Spacing */
       --space-xs: 0.25rem;
       --space-sm: 0.5rem;
       --space-md: 1rem;
       --space-lg: 1.5rem;
-      --space-xl: 2rem;
-      --space-2xl: 3rem;
-
-      /* Typography Scale */
+      --space-xl: 2.5rem;
+      
+      /* Typography */
       --font-xs: 0.75rem;
       --font-sm: 0.875rem;
-      --font-base: 1rem;
-      --font-lg: 1.05rem;
-      --font-xl: 1.25rem;
-
-      /* Transitions */
-      --transition-fast: 0.15s ease;
-      --transition-normal: 0.25s ease;
-      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-      /* Borders */
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
+      --font-base: 0.9375rem;
+      --font-lg: 1.125rem;
+      
+      /* Animations - Snappy & Smooth */
+      --snap: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      --smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
-    /* ============================================
-       Reset & Base Styles
-       ============================================ */
+    /* ================================================
+       RESET & BASE
+       ================================================ */
     * {
       margin: 0;
       padding: 0;
@@ -107,13 +100,10 @@
     }
 
     body {
-      background: var(--bg);
-      background-image:
-        radial-gradient(ellipse 70% 45% at 50% -20%, rgba(86, 214, 255, 0.12), transparent),
-        radial-gradient(ellipse 60% 40% at 0% 100%, rgba(154, 123, 255, 0.08), transparent),
-        linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg) 100%);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background: var(--bg-void);
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--font-base);
       line-height: 1.65;
       min-height: 100vh;
       display: flex;
@@ -121,123 +111,249 @@
       justify-content: center;
       padding: var(--space-xl) var(--space-md);
       position: relative;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* Subtle animated noise texture overlay */
+    /* Animated gradient background - unique touch */
     body::before {
       content: '';
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.02;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 10%, rgba(181, 55, 242, 0.02) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: bgPulse 15s ease-in-out infinite;
     }
 
+    @keyframes bgPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Grid overlay - minimal brutalist touch */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 24px),
-        linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 24px);
-      background-size: 24px 24px;
-      opacity: 0.25;
+      background-image: 
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 100px 100px;
+      opacity: 0.15;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* ============================================
-       Accessibility: Skip Link
-       ============================================ */
+    /* ================================================
+       SKIP LINK (Accessibility)
+       ================================================ */
     .skip-link {
       position: absolute;
       top: -100%;
       left: var(--space-md);
-      background: var(--accent-cyan);
-      color: var(--bg);
+      background: var(--accent);
+      color: var(--bg-void);
       padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
       text-decoration: none;
-      z-index: 1000;
-      transition: top var(--transition-fast);
+      z-index: 10000;
+      transition: top var(--snap);
     }
 
     .skip-link:focus {
       top: var(--space-md);
     }
 
-    /* ============================================
-       Layout
-       ============================================ */
+    /* ================================================
+       LAYOUT
+       ================================================ */
     .container {
-      max-width: 720px;
+      max-width: 700px;
       width: 100%;
       position: relative;
       z-index: 1;
+      opacity: 0;
+      animation: containerAppear 0.8s ease-out 0.2s forwards;
     }
 
+    @keyframes containerAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* ================================================
+       HEADER - Landing Animation
+       ================================================ */
     .header {
-      margin-bottom: var(--space-2xl);
-      animation: fadeInUp 0.6s ease-out;
-      text-align: center;
-      padding: var(--space-lg) 0;
+      margin-bottom: var(--space-xl);
+      padding: var(--space-xl) var(--space-lg);
+      position: relative;
+      background: var(--bg-panel);
+      border: 2px solid var(--border);
+      overflow: hidden;
+      opacity: 0;
+      animation: headerSlide 0.6s ease-out 0.4s forwards;
+    }
+
+    @keyframes headerSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Animated accent bar */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        var(--electric-blue),
+        var(--electric-purple),
+        var(--electric-pink),
+        var(--electric-blue)
+      );
+      background-size: 200% 100%;
+      animation: gradientFlow 3s linear infinite;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* Corners accent - unique touch */
+    .header::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: 
+        linear-gradient(var(--accent), var(--accent)) top left,
+        linear-gradient(var(--accent), var(--accent)) top right,
+        linear-gradient(var(--accent), var(--accent)) bottom left,
+        linear-gradient(var(--accent), var(--accent)) bottom right;
+      background-size: 2px 12px, 2px 12px, 2px 12px, 2px 12px;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      opacity: 0.6;
     }
 
     .name {
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-green) 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 800;
+      color: var(--text-primary);
       margin-bottom: var(--space-sm);
-      animation: gradientShift 8s ease infinite;
-      text-shadow: 0 0 60px rgba(86, 214, 255, 0.35);
+      letter-spacing: -0.03em;
+      position: relative;
+      text-transform: lowercase;
+      line-height: 1.1;
     }
 
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+    /* Glitch effect on name - unique and special */
+    .name::before,
+    .name::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    .name::before {
+      color: var(--electric-blue);
+      animation: glitch1 2.5s infinite;
+      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+      transform: translateX(-2px);
+    }
+
+    .name::after {
+      color: var(--electric-pink);
+      animation: glitch2 2.5s infinite;
+      clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+      transform: translateX(2px);
+    }
+
+    @keyframes glitch1 {
+      0%, 100% { opacity: 0; transform: translateX(0); }
+      2% { opacity: 1; transform: translateX(-3px); }
+      4% { opacity: 0; transform: translateX(0); }
+    }
+
+    @keyframes glitch2 {
+      0%, 100% { opacity: 0; transform: translateX(0); }
+      2% { opacity: 1; transform: translateX(3px); }
+      4% { opacity: 0; transform: translateX(0); }
+    }
+
+    .name:hover::before,
+    .name:hover::after {
+      animation-duration: 0.3s;
     }
 
     .tagline {
-      font-size: var(--font-lg);
-      color: var(--text-muted);
-      margin-bottom: 0;
-      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--font-base);
+      color: var(--text-secondary);
       font-weight: 400;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.05em;
+      padding-left: 2px;
     }
 
-    /* ============================================
-       Sections & Animation Delays
-       ============================================ */
+    /* ================================================
+       SECTIONS - Staggered Animation
+       ================================================ */
     .section {
-      margin-bottom: var(--space-lg);
-      animation: fadeInUp 0.6s ease-out;
-      animation-fill-mode: both;
+      margin-bottom: var(--space-md);
+      opacity: 0;
+      animation: sectionFade 0.4s ease-out forwards;
     }
 
-    .section:nth-child(1) { animation-delay: 0.1s; }
-    .section:nth-child(2) { animation-delay: 0.2s; }
-    .section:nth-child(3) { animation-delay: 0.3s; }
-    .section:nth-child(4) { animation-delay: 0.4s; }
+    .section:nth-child(1) { animation-delay: 0.7s; }
+    .section:nth-child(2) { animation-delay: 0.85s; }
+    .section:nth-child(3) { animation-delay: 1s; }
+    .section:nth-child(4) { animation-delay: 1.15s; }
 
-    /* ============================================
-       Dropdown Components (Shared Styles)
-       ============================================ */
-    .dropdown,
-    .sub-dropdown {
+    @keyframes sectionFade {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* ================================================
+       DROPDOWN COMPONENTS
+       ================================================ */
+    .dropdown {
+      background: var(--bg-panel);
       border: 1px solid var(--border);
-      overflow: hidden;
-      transition: all var(--transition-smooth);
+      border-left: 3px solid var(--accent);
+      transition: all var(--smooth);
       position: relative;
+      overflow: hidden;
     }
 
     .dropdown::before {
@@ -247,286 +363,287 @@
       top: 0;
       bottom: 0;
       width: 3px;
-      background: var(--section-accent, var(--accent-cyan));
-      opacity: 0.6;
-      transition: opacity var(--transition-fast), width var(--transition-fast);
-    }
-
-    .dropdown:hover::before,
-    .dropdown.open::before {
-      opacity: 1;
-      width: 4px;
+      background: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+      transition: all var(--snap);
     }
 
     .dropdown:hover {
-      border-color: var(--section-accent-dim, var(--accent-cyan-dim));
-      transform: translateX(2px);
+      border-color: var(--border-bright);
+      transform: translateX(4px);
     }
 
-    .sub-dropdown:hover {
-      border-color: var(--border);
-      background: var(--surface-hover);
+    .dropdown:hover::before {
+      width: 4px;
+      box-shadow: 0 0 25px var(--accent-glow);
     }
 
-    .dropdown-header,
-    .sub-dropdown-header {
+    .dropdown.open {
+      border-color: var(--border-bright);
+      background: var(--surface);
+    }
+
+    .dropdown-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: var(--space-lg);
       cursor: pointer;
-      user-select: none;
-      transition: background var(--transition-fast);
       border: none;
       background: transparent;
       width: 100%;
       text-align: left;
       font-family: inherit;
       color: inherit;
+      font-size: var(--font-base);
+      transition: all var(--snap);
+      user-select: none;
     }
 
-    .dropdown-header:hover,
-    .sub-dropdown-header:hover {
-      background: var(--surface-hover);
+    .dropdown-header:hover {
+      background: rgba(255, 255, 255, 0.02);
     }
 
-    .dropdown-header:active,
-    .sub-dropdown-header:active {
-      background: var(--surface-active);
-    }
-
-    /* Focus styles for accessibility */
-    .dropdown-header:focus-visible,
-    .sub-dropdown-header:focus-visible {
-      outline: 2px solid var(--section-accent, var(--accent-cyan));
+    .dropdown-header:focus-visible {
+      outline: 2px solid var(--accent);
       outline-offset: -2px;
     }
 
-    .dropdown-chevron,
-    .sub-dropdown-chevron {
-      color: var(--text-muted);
-      transition: transform var(--transition-smooth), color var(--transition-fast);
-      font-size: 0.7rem;
-    }
-
-    .dropdown:hover .dropdown-chevron {
-      color: var(--section-accent, var(--accent-cyan));
-    }
-
-    .dropdown.open .dropdown-chevron,
-    .sub-dropdown.open .sub-dropdown-chevron {
-      transform: rotate(180deg);
-    }
-
-    .dropdown-content,
-    .sub-dropdown-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height var(--transition-smooth);
-    }
-
-    .dropdown.open .dropdown-content,
-    .sub-dropdown.open .sub-dropdown-content {
-      max-height: 1200px;
-    }
-
-    /* ============================================
-       Main Dropdown Specific Styles
-       ============================================ */
-    .dropdown {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)) , var(--surface);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-md);
-      backdrop-filter: blur(12px);
-    }
-
-    .dropdown.open {
-      box-shadow:
-        0 4px 20px var(--section-glow, var(--accent-cyan-glow)),
-        0 0 0 1px var(--section-accent-dim, var(--accent-cyan-dim));
-      border-color: var(--section-accent-dim, var(--accent-cyan-dim));
-    }
-
-    /* Section-specific accent colors */
-    .section:nth-child(1) .dropdown {
-      --section-accent: var(--accent-cyan);
-      --section-accent-dim: var(--accent-cyan-dim);
-      --section-glow: var(--accent-cyan-glow);
-    }
-
-    .section:nth-child(2) .dropdown {
-      --section-accent: var(--accent-purple);
-      --section-accent-dim: var(--accent-purple-dim);
-      --section-glow: var(--accent-purple-glow);
-    }
-
-    .section:nth-child(3) .dropdown {
-      --section-accent: var(--accent-orange);
-      --section-accent-dim: var(--accent-orange-dim);
-      --section-glow: var(--accent-orange-glow);
-    }
-
-    .section:nth-child(4) .dropdown {
-      --section-accent: var(--accent-green);
-      --section-accent-dim: var(--accent-green-dim);
-      --section-glow: var(--accent-green-glow);
-    }
-
-    .dropdown-header {
-      padding: var(--space-md) var(--space-lg);
-      padding-left: calc(var(--space-lg) + 4px);
-      font-size: var(--font-base);
-      gap: var(--space-md);
-    }
-
     .dropdown-title {
-      font-weight: 500;
-      font-size: var(--font-base);
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: var(--space-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
     }
 
     .dropdown-icon {
-      width: 0.75rem;
-      height: 0.75rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--section-accent, var(--accent-cyan)), var(--section-accent-dim, var(--accent-cyan-dim)));
-      min-width: 0.75rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 12px var(--section-glow, var(--accent-cyan-glow));
-      transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      transform: rotate(45deg);
+      box-shadow: 0 0 15px var(--accent-glow);
+      transition: all var(--snap);
     }
 
     .dropdown:hover .dropdown-icon {
-      box-shadow: 0 0 16px var(--section-glow, var(--accent-cyan-glow));
-      transform: scale(1.1);
+      box-shadow: 0 0 25px var(--accent-glow);
+      transform: rotate(45deg) scale(1.2);
+    }
+
+    .dropdown.open .dropdown-icon {
+      background: var(--secondary);
+      box-shadow: 0 0 20px var(--secondary-glow);
+      animation: iconPulse 0.6s ease-out;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: rotate(45deg) scale(1); }
+      50% { transform: rotate(45deg) scale(1.3); }
+    }
+
+    .dropdown-chevron {
+      color: var(--text-dim);
+      font-size: var(--font-xs);
+      transition: all var(--smooth);
+      font-weight: 700;
+    }
+
+    .dropdown:hover .dropdown-chevron {
+      color: var(--text-secondary);
+    }
+
+    .dropdown.open .dropdown-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    .dropdown-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--smooth);
+    }
+
+    .dropdown.open .dropdown-content {
+      max-height: 1500px;
     }
 
     .dropdown-content > .content-inner {
-      padding: 0 var(--space-lg);
-      padding-left: calc(var(--space-lg) + 4px);
+      padding: 0 var(--space-lg) var(--space-lg);
     }
 
-    .dropdown.open .dropdown-content > .content-inner {
-      padding-bottom: var(--space-lg);
-    }
-
-    /* ============================================
-       Sub-Dropdown Specific Styles
-       ============================================ */
+    /* ================================================
+       SUB-DROPDOWN
+       ================================================ */
     .sub-dropdown {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)) , var(--code-bg);
-      border-radius: var(--radius-sm);
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
       margin: var(--space-sm) 0;
-      border: 1px solid var(--border-subtle);
+      transition: all var(--smooth);
+      position: relative;
     }
 
-    .sub-dropdown:first-child {
-      margin-top: 0;
+    .sub-dropdown::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 0;
+      background: var(--secondary);
+      transition: height var(--smooth);
+    }
+
+    .sub-dropdown:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-panel);
+    }
+
+    .sub-dropdown:hover::before {
+      height: 60%;
     }
 
     .sub-dropdown-header {
-      padding: 0.85rem var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
       font-size: var(--font-sm);
+      transition: all var(--snap);
+      user-select: none;
+    }
+
+    .sub-dropdown-header:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .sub-dropdown-header:focus-visible {
+      outline: 2px solid var(--secondary);
+      outline-offset: -2px;
     }
 
     .sub-dropdown-title {
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text);
       display: flex;
       align-items: center;
       gap: var(--space-sm);
+      font-weight: 600;
+      color: var(--text-primary);
     }
 
     .sub-dropdown-icon {
-      width: 0.4rem;
-      height: 0.4rem;
-      border-radius: 999px;
-      background: var(--section-accent, var(--accent-cyan));
-      opacity: 0.7;
-      transition: opacity var(--transition-fast), transform var(--transition-fast);
+      width: 4px;
+      height: 4px;
+      background: var(--secondary);
+      transition: all var(--snap);
     }
 
     .sub-dropdown:hover .sub-dropdown-icon {
-      opacity: 1;
-      transform: translateX(3px);
+      transform: translateX(4px);
+      box-shadow: 0 0 10px var(--secondary-glow);
     }
 
     .sub-dropdown-chevron {
+      color: var(--text-dim);
       font-size: var(--font-xs);
-      opacity: 0.5;
+      transition: all var(--smooth);
+      font-weight: 700;
     }
 
     .sub-dropdown:hover .sub-dropdown-chevron {
-      opacity: 0.8;
+      color: var(--text-secondary);
+    }
+
+    .sub-dropdown.open .sub-dropdown-chevron {
+      transform: rotate(180deg);
+      color: var(--secondary);
+    }
+
+    .sub-dropdown-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--smooth);
+    }
+
+    .sub-dropdown.open .sub-dropdown-content {
+      max-height: 800px;
     }
 
     .sub-dropdown-content > .content-inner {
-      padding: 0 var(--space-md);
+      padding: 0 var(--space-md) var(--space-md);
     }
 
-    .sub-dropdown.open .sub-dropdown-content > .content-inner {
-      padding-bottom: var(--space-md);
-    }
-
-    /* ============================================
-       Detail Components
-       ============================================ */
+    /* ================================================
+       DETAIL COMPONENTS
+       ================================================ */
     .dropdown-detail {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.9rem;
-      transition: background var(--transition-fast), padding var(--transition-fast);
-    }
-
-    .dropdown-detail:hover {
-      background: rgba(255, 255, 255, 0.02);
-      padding-left: var(--space-sm);
-      padding-right: var(--space-sm);
-      margin-left: calc(-1 * var(--space-sm));
-      margin-right: calc(-1 * var(--space-sm));
-      border-radius: var(--radius-sm);
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--border);
+      transition: all var(--snap);
     }
 
     .dropdown-detail:last-child {
       border-bottom: none;
     }
 
+    .dropdown-detail:hover {
+      padding-left: var(--space-sm);
+      background: var(--accent-subtle);
+    }
+
     .detail-label {
-      color: var(--text-muted);
-      font-weight: 500;
-      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: var(--font-sm);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
     }
 
     .detail-value {
-      color: var(--text);
-      font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
-      font-size: 0.85rem;
-      font-weight: 400;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: var(--font-sm);
+      font-weight: 500;
+      background: var(--bg-dark);
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--border);
+      transition: all var(--snap);
+    }
+
+    .dropdown-detail:hover .detail-value {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-subtle);
     }
 
     .detail-text {
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-size: var(--font-sm);
       line-height: 1.7;
-      padding: var(--space-sm) 0;
+      padding: var(--space-md) 0;
+      border-left: 2px solid var(--border);
+      padding-left: var(--space-md);
+      margin-top: var(--space-sm);
+      transition: border-color var(--snap);
     }
 
-    /* ============================================
-       Links Component
-       ============================================ */
+    .detail-text:hover {
+      border-color: var(--accent);
+    }
+
+    /* ================================================
+       LINKS
+       ================================================ */
     .links {
       display: flex;
       gap: var(--space-md);
@@ -538,39 +655,40 @@
       display: inline-flex;
       align-items: center;
       gap: var(--space-sm);
-      padding: 0.7rem var(--space-lg);
-      background: linear-gradient(135deg, var(--code-bg) 0%, var(--surface) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text);
+      padding: var(--space-md) var(--space-xl);
+      background: var(--bg-dark);
+      border: 2px solid var(--accent);
+      color: var(--accent);
       text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      font-family: 'JetBrains Mono', monospace;
-      transition: all var(--transition-smooth);
+      font-weight: 700;
+      font-size: var(--font-sm);
+      transition: all var(--snap);
       position: relative;
       overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
     .link::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--accent-green-glow), transparent);
-      opacity: 0;
-      transition: opacity var(--transition-fast);
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--smooth);
+      z-index: -1;
     }
 
     .link:hover::before {
-      opacity: 1;
+      transform: scaleX(1);
     }
 
     .link:hover {
-      border-color: var(--accent-green);
+      color: var(--bg-void);
+      border-color: var(--accent);
+      box-shadow: 0 0 30px var(--accent-glow);
       transform: translateY(-3px);
-      box-shadow:
-        0 8px 25px var(--accent-green-glow),
-        0 0 0 1px var(--accent-green-dim);
     }
 
     .link:active {
@@ -578,35 +696,37 @@
     }
 
     .link:focus-visible {
-      outline: 2px solid var(--accent-green);
-      outline-offset: 2px;
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
     }
 
     .link-icon {
-      width: 0.35rem;
-      height: 0.35rem;
-      border-radius: 999px;
-      background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green-glow);
-      transition: transform var(--transition-fast);
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      transition: transform var(--snap);
     }
 
     .link:hover .link-icon {
-      transform: translateX(3px);
+      transform: translateX(4px);
     }
 
-    /* ============================================
-       Footer
-       ============================================ */
+    /* ================================================
+       FOOTER
+       ================================================ */
     .footer {
-      margin-top: var(--space-2xl);
+      margin-top: var(--space-xl);
       padding-top: var(--space-xl);
-      border-top: 1px solid var(--border-subtle);
+      border-top: 1px solid var(--border);
       text-align: center;
-      color: var(--text-muted);
-      font-size: var(--font-sm);
-      animation: fadeIn 0.6s ease-out 0.5s both;
       position: relative;
+      opacity: 0;
+      animation: footerFade 0.4s ease-out 1.3s forwards;
+    }
+
+    @keyframes footerFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .footer::before {
@@ -615,69 +735,67 @@
       top: -1px;
       left: 50%;
       transform: translateX(-50%);
-      width: 60px;
+      width: 120px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent-cyan-dim), transparent);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--accent),
+        var(--secondary),
+        transparent
+      );
     }
 
     .footer p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-      opacity: 0.7;
-      transition: opacity var(--transition-fast);
+      font-size: var(--font-sm);
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      font-weight: 500;
+      transition: color var(--snap);
     }
 
     .footer:hover p {
-      opacity: 1;
+      color: var(--text-secondary);
     }
 
-    /* ============================================
-       Animations
-       ============================================ */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
+    /* ================================================
+       ANIMATIONS
+       ================================================ */
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    /* ============================================
-       Responsive / Mobile Styles
-       ============================================ */
+    /* ================================================
+       RESPONSIVE
+       ================================================ */
     @media (max-width: 640px) {
       body {
         padding: var(--space-lg) var(--space-md);
       }
 
       .header {
-        padding: var(--space-md) 0;
-        margin-bottom: var(--space-xl);
+        padding: var(--space-lg) var(--space-md);
       }
 
-      /* Increase tap targets for mobile */
       .dropdown-header {
-        padding: var(--space-lg);
-        padding-left: calc(var(--space-lg) + 4px);
+        padding: var(--space-md);
         min-height: 52px;
       }
 
       .sub-dropdown-header {
-        padding: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
         min-height: 48px;
+      }
+
+      .dropdown-detail {
+        flex-direction: column;
+        gap: var(--space-sm);
+        align-items: flex-start;
+      }
+
+      .detail-value {
+        width: 100%;
       }
 
       .links {
@@ -690,27 +808,14 @@
         min-height: 48px;
       }
 
-      .dropdown-detail {
-        flex-direction: column;
-        gap: var(--space-xs);
-        align-items: flex-start;
-      }
-
-      .detail-value {
-        width: 100%;
-        text-align: left;
-      }
-
       .dropdown:hover {
-        transform: none;
-      }
-
-      .tagline {
-        font-size: var(--font-base);
+        transform: translateX(2px);
       }
     }
 
-    /* Reduced motion preference */
+    /* ================================================
+       REDUCED MOTION
+       ================================================ */
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -728,7 +833,7 @@
 
   <div class="container">
     <header class="header">
-      <h1 class="name">psychananaz</h1>
+      <h1 class="name" data-text="psychananaz">psychananaz</h1>
       <p class="tagline">Arch user, open source contributor, hobbyist developer.</p>
     </header>
 

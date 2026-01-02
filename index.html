@@ -1140,10 +1140,13 @@
         }
       });
 
-      // Prevent dropdown close when clicking inside dropdown content
+      // Prevent dropdown close when clicking inside dropdown content (but not on headers)
       container.querySelectorAll('.dropdown').forEach(function(dropdown) {
         dropdown.addEventListener('click', function(event) {
-          event.stopPropagation();
+          // Only stop propagation if we're not clicking on a header button
+          if (!event.target.closest('.dropdown-header') && !event.target.closest('.sub-dropdown-header')) {
+            event.stopPropagation();
+          }
         });
       });
     })();

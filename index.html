@@ -296,19 +296,24 @@
 
     @keyframes glitch1 {
       0%, 100% { opacity: 0; transform: translateX(0); }
-      2% { opacity: 1; transform: translateX(-3px); }
-      4% { opacity: 0; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(-3px); }
     }
 
     @keyframes glitch2 {
       0%, 100% { opacity: 0; transform: translateX(0); }
-      2% { opacity: 1; transform: translateX(3px); }
-      4% { opacity: 0; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(3px); }
+    }
+
+    /* Pause glitch by default to save GPU, activate on hover */
+    .name::before,
+    .name::after {
+      animation-play-state: paused;
     }
 
     .name:hover::before,
     .name:hover::after {
-      animation-duration: 0.3s;
+      animation-play-state: running;
+      animation-duration: 0.15s;
     }
 
     .tagline {

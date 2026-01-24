@@ -18,84 +18,27 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://psychananaz.dev" />
 
-  <!-- Performance -->
-  <link rel="preconnect" href="https://github.com" />
-
-  <!-- Monospace Font for Tech Aesthetic -->
+  <!-- Monospace Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================
-       CSS Variables / Design Tokens
-       ============================================ */
     :root {
-      /* Colors */
-      --bg: #0b0d12;
-      --bg-gradient-start: #0f1219;
-      --bg-gradient-end: #0b0d12;
-      --surface: #141924;
-      --surface-hover: #1a2030;
-      --surface-active: #21293b;
-      --border: #2a3346;
-      --border-subtle: #1c2332;
-      --text: #e5e7ef;
-      --text-muted: #9aa3b2;
-      --code-bg: #101520;
-      --ink: rgba(90, 214, 255, 0.18);
+      --bg-primary: #1A1A1A; /* 60% */
+      --bg-secondary: #2C2C2C; /* 30% */
+      --accent: #007BFF; /* 10% */
+      --text-primary: #F5F5F5;
+      --border-color: #444444;
 
-      /* Section Accent Colors */
-      --accent-cyan: #56d6ff;
-      --accent-cyan-dim: #2aa5c7;
-      --accent-cyan-glow: rgba(86, 214, 255, 0.18);
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
 
-      --accent-purple: #9a7bff;
-      --accent-purple-dim: #6f56d9;
-      --accent-purple-glow: rgba(154, 123, 255, 0.2);
-
-      --accent-orange: #f2a860;
-      --accent-orange-dim: #d8873f;
-      --accent-orange-glow: rgba(242, 168, 96, 0.18);
-
-      --accent-green: #4bdc9f;
-      --accent-green-dim: #2aa876;
-      --accent-green-glow: rgba(75, 220, 159, 0.18);
-
-      /* Legacy support */
-      --accent: var(--accent-cyan);
-      --accent-dim: var(--accent-cyan-dim);
-      --success: #4bdc9f;
-
-      /* Spacing Scale */
-      --space-xs: 0.25rem;
-      --space-sm: 0.5rem;
-      --space-md: 1rem;
-      --space-lg: 1.5rem;
-      --space-xl: 2rem;
-      --space-2xl: 3rem;
-
-      /* Typography Scale */
-      --font-xs: 0.75rem;
-      --font-sm: 0.875rem;
-      --font-base: 1rem;
-      --font-lg: 1.05rem;
-      --font-xl: 1.25rem;
-
-      /* Transitions */
-      --transition-fast: 0.15s ease;
-      --transition-normal: 0.25s ease;
-      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-      /* Borders */
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
+      --font-family: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+      --transition-smooth: 0.2s ease-in-out;
     }
 
-    /* ============================================
-       Reset & Base Styles
-       ============================================ */
     * {
       margin: 0;
       padding: 0;
@@ -107,625 +50,148 @@
     }
 
     body {
-      background: var(--bg);
-      background-image:
-        radial-gradient(ellipse 70% 45% at 50% -20%, rgba(86, 214, 255, 0.12), transparent),
-        radial-gradient(ellipse 60% 40% at 0% 100%, rgba(154, 123, 255, 0.08), transparent),
-        linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg) 100%);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-      line-height: 1.65;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      display: grid;
+      place-items: center;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--space-xl) var(--space-md);
-      position: relative;
+      padding: var(--space-lg);
     }
 
-    /* Subtle animated noise texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.02;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 24px),
-        linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 24px);
-      background-size: 24px 24px;
-      opacity: 0.25;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ============================================
-       Accessibility: Skip Link
-       ============================================ */
     .skip-link {
       position: absolute;
       top: -100%;
       left: var(--space-md);
-      background: var(--accent-cyan);
-      color: var(--bg);
+      background: var(--accent);
+      color: var(--text-primary);
       padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
       text-decoration: none;
       z-index: 1000;
-      transition: top var(--transition-fast);
+      transition: top var(--transition-smooth);
     }
 
     .skip-link:focus {
       top: var(--space-md);
     }
 
-    /* ============================================
-       Layout
-       ============================================ */
     .container {
-      max-width: 720px;
       width: 100%;
-      position: relative;
-      z-index: 1;
+      max-width: 720px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      display: grid;
+      grid-template-columns: 1fr;
     }
 
-    .header {
-      margin-bottom: var(--space-2xl);
-      animation: fadeInUp 0.6s ease-out;
-      text-align: center;
-      padding: var(--space-lg) 0;
+    .header, .section, .footer {
+      padding: var(--space-lg);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section:last-of-type, .footer {
+        border-bottom: none;
     }
 
     .name {
-      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-size: 2rem;
       font-weight: 700;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-green) 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: var(--space-sm);
-      animation: gradientShift 8s ease infinite;
-      text-shadow: 0 0 60px rgba(86, 214, 255, 0.35);
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      text-align: center;
     }
 
     .tagline {
-      font-size: var(--font-lg);
-      color: var(--text-muted);
-      margin-bottom: 0;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 400;
-      letter-spacing: 0.02em;
+      text-align: center;
+      margin-top: var(--space-sm);
     }
 
-    /* ============================================
-       Sections & Animation Delays
-       ============================================ */
-    .section {
-      margin-bottom: var(--space-lg);
-      animation: fadeInUp 0.6s ease-out;
-      animation-fill-mode: both;
-    }
-
-    .section:nth-child(1) { animation-delay: 0.1s; }
-    .section:nth-child(2) { animation-delay: 0.2s; }
-    .section:nth-child(3) { animation-delay: 0.3s; }
-    .section:nth-child(4) { animation-delay: 0.4s; }
-
-    /* ============================================
-       Dropdown Components (Shared Styles)
-       ============================================ */
-    .dropdown,
-    .sub-dropdown {
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: all var(--transition-smooth);
-      position: relative;
-    }
-
-    .dropdown::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: var(--section-accent, var(--accent-cyan));
-      opacity: 0.6;
-      transition: opacity var(--transition-fast), width var(--transition-fast);
-    }
-
-    .dropdown:hover::before,
-    .dropdown.open::before {
-      opacity: 1;
-      width: 4px;
-    }
-
-    .dropdown:hover {
-      border-color: var(--section-accent-dim, var(--accent-cyan-dim));
-      transform: translateX(2px);
-    }
-
-    .sub-dropdown:hover {
-      border-color: var(--border);
-      background: var(--surface-hover);
-    }
-
-    .dropdown-header,
-    .sub-dropdown-header {
+    .dropdown-header, .sub-dropdown-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
       user-select: none;
-      transition: background var(--transition-fast);
-      border: none;
       background: transparent;
+      border: 1px solid transparent;
       width: 100%;
       text-align: left;
       font-family: inherit;
       color: inherit;
+      padding: var(--space-md);
+      transition: all var(--transition-smooth);
     }
 
-    .dropdown-header:hover,
-    .sub-dropdown-header:hover {
-      background: var(--surface-hover);
+    .dropdown-header:hover, .sub-dropdown-header:hover {
+        border: 1px solid var(--accent);
+        color: var(--accent);
     }
 
-    .dropdown-header:active,
-    .sub-dropdown-header:active {
-      background: var(--surface-active);
+    .dropdown-chevron {
+      transition: transform var(--transition-smooth);
     }
 
-    /* Focus styles for accessibility */
-    .dropdown-header:focus-visible,
-    .sub-dropdown-header:focus-visible {
-      outline: 2px solid var(--section-accent, var(--accent-cyan));
-      outline-offset: -2px;
-    }
-
-    .dropdown-chevron,
-    .sub-dropdown-chevron {
-      color: var(--text-muted);
-      transition: transform var(--transition-smooth), color var(--transition-fast);
-      font-size: 0.7rem;
-    }
-
-    .dropdown:hover .dropdown-chevron {
-      color: var(--section-accent, var(--accent-cyan));
-    }
-
-    .dropdown.open .dropdown-chevron,
-    .sub-dropdown.open .sub-dropdown-chevron {
+    .open .dropdown-chevron {
       transform: rotate(180deg);
     }
 
-    .dropdown-content,
-    .sub-dropdown-content {
+    .dropdown-content, .sub-dropdown-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height var(--transition-smooth);
+      transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
     }
 
-    .dropdown.open .dropdown-content,
-    .sub-dropdown.open .sub-dropdown-content {
-      max-height: 1200px;
+    .open .dropdown-content, .open .sub-dropdown-content {
+        max-height: 1500px;
     }
 
-    /* ============================================
-       Main Dropdown Specific Styles
-       ============================================ */
-    .dropdown {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)) , var(--surface);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-md);
-      backdrop-filter: blur(12px);
+    .content-inner {
+        padding: 0 var(--space-md) var(--space-md);
+        display: grid;
+        gap: var(--space-md);
     }
 
-    .dropdown.open {
-      box-shadow:
-        0 4px 20px var(--section-glow, var(--accent-cyan-glow)),
-        0 0 0 1px var(--section-accent-dim, var(--accent-cyan-dim));
-      border-color: var(--section-accent-dim, var(--accent-cyan-dim));
-    }
-
-    /* Section-specific accent colors */
-    .section:nth-child(1) .dropdown {
-      --section-accent: var(--accent-cyan);
-      --section-accent-dim: var(--accent-cyan-dim);
-      --section-glow: var(--accent-cyan-glow);
-    }
-
-    .section:nth-child(2) .dropdown {
-      --section-accent: var(--accent-purple);
-      --section-accent-dim: var(--accent-purple-dim);
-      --section-glow: var(--accent-purple-glow);
-    }
-
-    .section:nth-child(3) .dropdown {
-      --section-accent: var(--accent-orange);
-      --section-accent-dim: var(--accent-orange-dim);
-      --section-glow: var(--accent-orange-glow);
-    }
-
-    .section:nth-child(4) .dropdown {
-      --section-accent: var(--accent-green);
-      --section-accent-dim: var(--accent-green-dim);
-      --section-glow: var(--accent-green-glow);
-    }
-
-    .dropdown-header {
-      padding: var(--space-md) var(--space-lg);
-      padding-left: calc(var(--space-lg) + 4px);
-      font-size: var(--font-base);
-      gap: var(--space-md);
-    }
-
-    .dropdown-title {
-      font-weight: 500;
-      font-size: var(--font-base);
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-    }
-
-    .dropdown-icon {
-      width: 0.75rem;
-      height: 0.75rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--section-accent, var(--accent-cyan)), var(--section-accent-dim, var(--accent-cyan-dim)));
-      min-width: 0.75rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 12px var(--section-glow, var(--accent-cyan-glow));
-      transition: box-shadow var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .dropdown:hover .dropdown-icon {
-      box-shadow: 0 0 16px var(--section-glow, var(--accent-cyan-glow));
-      transform: scale(1.1);
-    }
-
-    .dropdown-content > .content-inner {
-      padding: 0 var(--space-lg);
-      padding-left: calc(var(--space-lg) + 4px);
-    }
-
-    .dropdown.open .dropdown-content > .content-inner {
-      padding-bottom: var(--space-lg);
-    }
-
-    /* ============================================
-       Sub-Dropdown Specific Styles
-       ============================================ */
     .sub-dropdown {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)) , var(--code-bg);
-      border-radius: var(--radius-sm);
-      margin: var(--space-sm) 0;
-      border: 1px solid var(--border-subtle);
+        border: 1px solid var(--border-color);
     }
 
-    .sub-dropdown:first-child {
-      margin-top: 0;
+    .sub-dropdown-content p {
+        padding: 0 var(--space-md) var(--space-md);
     }
 
-    .sub-dropdown-header {
-      padding: 0.85rem var(--space-md);
-      font-size: var(--font-sm);
-    }
-
-    .sub-dropdown-title {
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-    }
-
-    .sub-dropdown-icon {
-      width: 0.4rem;
-      height: 0.4rem;
-      border-radius: 999px;
-      background: var(--section-accent, var(--accent-cyan));
-      opacity: 0.7;
-      transition: opacity var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .sub-dropdown:hover .sub-dropdown-icon {
-      opacity: 1;
-      transform: translateX(3px);
-    }
-
-    .sub-dropdown-chevron {
-      font-size: var(--font-xs);
-      opacity: 0.5;
-    }
-
-    .sub-dropdown:hover .sub-dropdown-chevron {
-      opacity: 0.8;
-    }
-
-    .sub-dropdown-content > .content-inner {
-      padding: 0 var(--space-md);
-    }
-
-    .sub-dropdown.open .sub-dropdown-content > .content-inner {
-      padding-bottom: var(--space-md);
-    }
-
-    /* ============================================
-       Detail Components
-       ============================================ */
     .dropdown-detail {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.9rem;
-      transition: background var(--transition-fast), padding var(--transition-fast);
-    }
-
-    .dropdown-detail:hover {
-      background: rgba(255, 255, 255, 0.02);
-      padding-left: var(--space-sm);
-      padding-right: var(--space-sm);
-      margin-left: calc(-1 * var(--space-sm));
-      margin-right: calc(-1 * var(--space-sm));
-      border-radius: var(--radius-sm);
-    }
-
-    .dropdown-detail:last-child {
-      border-bottom: none;
-    }
-
-    .detail-label {
-      color: var(--text-muted);
-      font-weight: 500;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .detail-value {
-      color: var(--text);
-      font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
-      font-size: 0.85rem;
-      font-weight: 400;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .detail-text {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
-      padding: var(--space-sm) 0;
-    }
-
-    /* ============================================
-       Links Component
-       ============================================ */
-    .links {
-      display: flex;
-      gap: var(--space-md);
-      flex-wrap: wrap;
-      padding: var(--space-sm) 0;
+      padding: var(--space-sm) var(--space-md);
+      border-top: 1px solid var(--border-color);
     }
 
     .link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: 0.7rem var(--space-lg);
-      background: linear-gradient(135deg, var(--code-bg) 0%, var(--surface) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text);
+      color: var(--accent);
       text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      font-family: 'JetBrains Mono', monospace;
-      transition: all var(--transition-smooth);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .link::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--accent-green-glow), transparent);
-      opacity: 0;
-      transition: opacity var(--transition-fast);
-    }
-
-    .link:hover::before {
-      opacity: 1;
+      border-bottom: 1px solid transparent;
+      transition: border-bottom var(--transition-smooth);
     }
 
     .link:hover {
-      border-color: var(--accent-green);
-      transform: translateY(-3px);
-      box-shadow:
-        0 8px 25px var(--accent-green-glow),
-        0 0 0 1px var(--accent-green-dim);
+      border-bottom: 1px solid var(--accent);
     }
 
-    .link:active {
-      transform: translateY(-1px);
-    }
-
-    .link:focus-visible {
-      outline: 2px solid var(--accent-green);
-      outline-offset: 2px;
-    }
-
-    .link-icon {
-      width: 0.35rem;
-      height: 0.35rem;
-      border-radius: 999px;
-      background: var(--accent-green);
-      box-shadow: 0 0 8px var(--accent-green-glow);
-      transition: transform var(--transition-fast);
-    }
-
-    .link:hover .link-icon {
-      transform: translateX(3px);
-    }
-
-    /* ============================================
-       Footer
-       ============================================ */
     .footer {
-      margin-top: var(--space-2xl);
-      padding-top: var(--space-xl);
-      border-top: 1px solid var(--border-subtle);
       text-align: center;
-      color: var(--text-muted);
-      font-size: var(--font-sm);
-      animation: fadeIn 0.6s ease-out 0.5s both;
-      position: relative;
+      border-top: 1px solid var(--border-color);
     }
 
-    .footer::before {
-      content: '';
-      position: absolute;
-      top: -1px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent-cyan-dim), transparent);
-    }
-
-    .footer p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-      opacity: 0.7;
-      transition: opacity var(--transition-fast);
-    }
-
-    .footer:hover p {
-      opacity: 1;
-    }
-
-    /* ============================================
-       Animations
-       ============================================ */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* ============================================
-       Responsive / Mobile Styles
-       ============================================ */
-    @media (max-width: 640px) {
-      body {
-        padding: var(--space-lg) var(--space-md);
-      }
-
-      .header {
-        padding: var(--space-md) 0;
-        margin-bottom: var(--space-xl);
-      }
-
-      /* Increase tap targets for mobile */
-      .dropdown-header {
-        padding: var(--space-lg);
-        padding-left: calc(var(--space-lg) + 4px);
-        min-height: 52px;
-      }
-
-      .sub-dropdown-header {
-        padding: var(--space-md);
-        min-height: 48px;
-      }
-
-      .links {
-        flex-direction: column;
-      }
-
-      .link {
-        width: 100%;
-        justify-content: center;
-        min-height: 48px;
-      }
-
-      .dropdown-detail {
-        flex-direction: column;
-        gap: var(--space-xs);
-        align-items: flex-start;
-      }
-
-      .detail-value {
-        width: 100%;
-        text-align: left;
-      }
-
-      .dropdown:hover {
-        transform: none;
-      }
-
-      .tagline {
-        font-size: var(--font-base);
-      }
-    }
-
-    /* Reduced motion preference */
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Skip link for keyboard users -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
   <div class="container">
     <header class="header">
       <h1 class="name">psychananaz</h1>
@@ -735,94 +201,62 @@
     <main id="main-content">
       <section class="section" aria-label="About section">
         <div class="dropdown" role="region" aria-labelledby="about-heading">
-          <button class="dropdown-header"
-                  id="about-heading"
-                  aria-expanded="false"
-                  aria-controls="about-content">
-            <span class="dropdown-title">
-              <span class="dropdown-icon" aria-hidden="true"></span>
-              <span>About</span>
-            </span>
-            <span class="dropdown-chevron" aria-hidden="true">▼</span>
+          <button class="dropdown-header" id="about-heading" aria-expanded="false" aria-controls="about-content">
+            <span>About</span>
+            <span class="dropdown-chevron">▼</span>
           </button>
-          <div class="dropdown-content" id="about-content" role="region">
+          <div class="dropdown-content" id="about-content">
             <div class="content-inner">
               <div class="sub-dropdown" role="region" aria-labelledby="whatido-heading">
-                <button class="sub-dropdown-header"
-                        id="whatido-heading"
-                        aria-expanded="false"
-                        aria-controls="whatido-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>What I Do</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="whatido-heading" aria-expanded="false" aria-controls="whatido-content">
+                  <span>What I Do</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="whatido-content">
-                  <div class="content-inner">
-                    <p class="detail-text">
+                    <p>
                       Most of my time goes into contributing to open source projects. My own work is usually
                       just personal experiments or hobby projects, though sometimes I work on something more ambitious.
                     </p>
-                  </div>
                 </div>
               </div>
-
               <div class="sub-dropdown" role="region" aria-labelledby="philosophy-heading">
-                <button class="sub-dropdown-header"
-                        id="philosophy-heading"
-                        aria-expanded="false"
-                        aria-controls="philosophy-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>Philosophy</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="philosophy-heading" aria-expanded="false" aria-controls="philosophy-content">
+                  <span>Philosophy</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="philosophy-content">
-                  <div class="content-inner">
                     <div class="dropdown-detail">
-                      <span class="detail-label">Code</span>
-                      <span class="detail-value">Simple, maintainable</span>
+                      <span>Code</span>
+                      <span>Simple, maintainable</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Tools</span>
-                      <span class="detail-value">Open source, customizable</span>
+                      <span>Tools</span>
+                      <span>Open source, customizable</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Approach</span>
-                      <span class="detail-value">Learn by doing</span>
+                      <span>Approach</span>
+                      <span>Learn by doing</span>
                     </div>
-                  </div>
                 </div>
               </div>
-
               <div class="sub-dropdown" role="region" aria-labelledby="interests-heading">
-                <button class="sub-dropdown-header"
-                        id="interests-heading"
-                        aria-expanded="false"
-                        aria-controls="interests-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>Interests</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="interests-heading" aria-expanded="false" aria-controls="interests-content">
+                  <span>Interests</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="interests-content">
-                  <div class="content-inner">
                     <div class="dropdown-detail">
-                      <span class="detail-label">Primary</span>
-                      <span class="detail-value">Linux, Wayland, Open Source</span>
+                      <span>Primary</span>
+                      <span>Linux, Wayland, Open Source</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Learning</span>
-                      <span class="detail-value">Rust, Systems Programming</span>
+                      <span>Learning</span>
+                      <span>Rust, Systems Programming</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Tinkering</span>
-                      <span class="detail-value">WMs, Dotfiles, Ricing</span>
+                      <span>Tinkering</span>
+                      <span>WMs, Dotfiles, Ricing</span>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -832,118 +266,86 @@
 
       <section class="section" aria-label="System section">
         <div class="dropdown" role="region" aria-labelledby="system-heading">
-          <button class="dropdown-header"
-                  id="system-heading"
-                  aria-expanded="false"
-                  aria-controls="system-content">
-            <span class="dropdown-title">
-              <span class="dropdown-icon" aria-hidden="true"></span>
-              <span>System</span>
-            </span>
-            <span class="dropdown-chevron" aria-hidden="true">▼</span>
+          <button class="dropdown-header" id="system-heading" aria-expanded="false" aria-controls="system-content">
+            <span>System</span>
+            <span class="dropdown-chevron">▼</span>
           </button>
-          <div class="dropdown-content" id="system-content" role="region">
+          <div class="dropdown-content" id="system-content">
             <div class="content-inner">
               <div class="sub-dropdown" role="region" aria-labelledby="os-heading">
-                <button class="sub-dropdown-header"
-                        id="os-heading"
-                        aria-expanded="false"
-                        aria-controls="os-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>Operating System</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="os-heading" aria-expanded="false" aria-controls="os-content">
+                  <span>Operating System</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="os-content">
-                  <div class="content-inner">
                     <div class="dropdown-detail">
-                      <span class="detail-label">Distribution</span>
-                      <span class="detail-value">Arch Linux</span>
+                      <span>Distribution</span>
+                      <span>Arch Linux</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Philosophy</span>
-                      <span class="detail-value">KISS, Rolling Release</span>
+                      <span>Philosophy</span>
+                      <span>KISS, Rolling Release</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Package Manager</span>
-                      <span class="detail-value">pacman, yay</span>
+                      <span>Package Manager</span>
+                      <span>pacman, yay</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Why Arch?</span>
-                      <span class="detail-value">Control, AUR, Minimalism</span>
+                      <span>Why Arch?</span>
+                      <span>Control, AUR, Minimalism</span>
                     </div>
-                  </div>
                 </div>
               </div>
-
               <div class="sub-dropdown" role="region" aria-labelledby="wm-heading">
-                <button class="sub-dropdown-header"
-                        id="wm-heading"
-                        aria-expanded="false"
-                        aria-controls="wm-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>Window Manager</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="wm-heading" aria-expanded="false" aria-controls="wm-content">
+                  <span>Window Manager</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="wm-content">
-                  <div class="content-inner">
                     <div class="dropdown-detail">
-                      <span class="detail-label">WM</span>
-                      <span class="detail-value">niri</span>
+                      <span>WM</span>
+                      <span>niri</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Type</span>
-                      <span class="detail-value">Scrollable Tiling</span>
+                      <span>Type</span>
+                      <span>Scrollable Tiling</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Compositor</span>
-                      <span class="detail-value">Wayland-native</span>
+                      <span>Compositor</span>
+                      <span>Wayland-native</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Language</span>
-                      <span class="detail-value">Rust</span>
+                      <span>Language</span>
+                      <span>Rust</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Why niri?</span>
-                      <span class="detail-value">Unique workflow, smooth</span>
+                      <span>Why niri?</span>
+                      <span>Unique workflow, smooth</span>
                     </div>
-                  </div>
                 </div>
               </div>
-
               <div class="sub-dropdown" role="region" aria-labelledby="tools-heading">
-                <button class="sub-dropdown-header"
-                        id="tools-heading"
-                        aria-expanded="false"
-                        aria-controls="tools-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>Tools & Setup</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="tools-heading" aria-expanded="false" aria-controls="tools-content">
+                  <span>Tools & Setup</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="tools-content">
-                  <div class="content-inner">
                     <div class="dropdown-detail">
-                      <span class="detail-label">Terminal</span>
-                      <span class="detail-value">alacritty / kitty</span>
+                      <span>Terminal</span>
+                      <span>alacritty / kitty</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Shell</span>
-                      <span class="detail-value">zsh / fish</span>
+                      <span>Shell</span>
+                      <span>zsh / fish</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Editor</span>
-                      <span class="detail-value">neovim</span>
+                      <span>Editor</span>
+                      <span>neovim</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Dotfiles</span>
-                      <span class="detail-value">git-managed</span>
+                      <span>Dotfiles</span>
+                      <span>git-managed</span>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -953,86 +355,54 @@
 
       <section class="section" aria-label="Development section">
         <div class="dropdown" role="region" aria-labelledby="dev-heading">
-          <button class="dropdown-header"
-                  id="dev-heading"
-                  aria-expanded="false"
-                  aria-controls="dev-content">
-            <span class="dropdown-title">
-              <span class="dropdown-icon" aria-hidden="true"></span>
-              <span>Development</span>
-            </span>
-            <span class="dropdown-chevron" aria-hidden="true">▼</span>
+          <button class="dropdown-header" id="dev-heading" aria-expanded="false" aria-controls="dev-content">
+            <span>Development</span>
+            <span class="dropdown-chevron">▼</span>
           </button>
-          <div class="dropdown-content" id="dev-content" role="region">
+          <div class="dropdown-content" id="dev-content">
             <div class="content-inner">
               <div class="sub-dropdown" role="region" aria-labelledby="langs-heading">
-                <button class="sub-dropdown-header"
-                        id="langs-heading"
-                        aria-expanded="false"
-                        aria-controls="langs-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>Languages & Tech</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="langs-heading" aria-expanded="false" aria-controls="langs-content">
+                  <span>Languages & Tech</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="langs-content">
-                  <div class="content-inner">
                     <div class="dropdown-detail">
-                      <span class="detail-label">Learning</span>
-                      <span class="detail-value">Rust, C</span>
+                      <span>Learning</span>
+                      <span>Rust, C</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Comfortable</span>
-                      <span class="detail-value">Python, Shell scripting</span>
+                      <span>Comfortable</span>
+                      <span>Python, Shell scripting</span>
                     </div>
                     <div class="dropdown-detail">
-                      <span class="detail-label">Familiar</span>
-                      <span class="detail-value">JavaScript, Go</span>
+                      <span>Familiar</span>
+                      <span>JavaScript, Go</span>
                     </div>
-                  </div>
                 </div>
               </div>
-
               <div class="sub-dropdown" role="region" aria-labelledby="contrib-heading">
-                <button class="sub-dropdown-header"
-                        id="contrib-heading"
-                        aria-expanded="false"
-                        aria-controls="contrib-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>Contributions</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="contrib-heading" aria-expanded="false" aria-controls="contrib-content">
+                  <span>Contributions</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="contrib-content">
-                  <div class="content-inner">
-                    <p class="detail-text">
+                    <p>
                       Contribute to various open source projects when I find bugs, have ideas for improvements,
                       or want to add features I need. Mostly focused on Linux desktop tools and utilities.
                     </p>
-                  </div>
                 </div>
               </div>
-
               <div class="sub-dropdown" role="region" aria-labelledby="projects-heading">
-                <button class="sub-dropdown-header"
-                        id="projects-heading"
-                        aria-expanded="false"
-                        aria-controls="projects-content">
-                  <span class="sub-dropdown-title">
-                    <span class="sub-dropdown-icon" aria-hidden="true"></span>
-                    <span>Personal Projects</span>
-                  </span>
-                  <span class="sub-dropdown-chevron" aria-hidden="true">▼</span>
+                <button class="sub-dropdown-header" id="projects-heading" aria-expanded="false" aria-controls="projects-content">
+                  <span>Personal Projects</span>
+                  <span class="dropdown-chevron">▼</span>
                 </button>
                 <div class="sub-dropdown-content" id="projects-content">
-                  <div class="content-inner">
-                    <p class="detail-text">
+                    <p>
                       Usually small utilities and scripts for personal use. Occasionally work on something
                       larger, but most projects stay experimental or just solve problems I have.
                     </p>
-                  </div>
                 </div>
               </div>
             </div>
@@ -1042,24 +412,15 @@
 
       <section class="section" aria-label="Links section">
         <div class="dropdown" role="region" aria-labelledby="links-heading">
-          <button class="dropdown-header"
-                  id="links-heading"
-                  aria-expanded="false"
-                  aria-controls="links-content">
-            <span class="dropdown-title">
-              <span class="dropdown-icon" aria-hidden="true"></span>
-              <span>Links</span>
-            </span>
-            <span class="dropdown-chevron" aria-hidden="true">▼</span>
+          <button class="dropdown-header" id="links-heading" aria-expanded="false" aria-controls="links-content">
+            <span>Links</span>
+            <span class="dropdown-chevron">▼</span>
           </button>
-          <div class="dropdown-content" id="links-content" role="region">
+          <div class="dropdown-content" id="links-content">
             <div class="content-inner">
-              <div class="links">
                 <a href="https://github.com/psychananaz" class="link" target="_blank" rel="noopener noreferrer">
-                  <span class="link-icon" aria-hidden="true"></span>
-                  <span>GitHub</span>
+                  GitHub
                 </a>
-              </div>
             </div>
           </div>
         </div>
@@ -1072,82 +433,48 @@
   </div>
 
   <script>
-    // ============================================
-    // Dropdown Functionality with Event Delegation
-    // ============================================
     (function() {
       'use strict';
 
       const container = document.querySelector('.container');
 
-      // Toggle dropdown open state and update ARIA
-      function toggleDropdown(dropdownEl, headerEl) {
-        const isOpen = dropdownEl.classList.toggle('open');
-        headerEl.setAttribute('aria-expanded', isOpen);
+      function toggleDropdown(el, header) {
+        const isOpen = el.classList.toggle('open');
+        header.setAttribute('aria-expanded', isOpen);
       }
 
-      // Event delegation for all dropdown interactions
       container.addEventListener('click', function(event) {
-        const subHeader = event.target.closest('.sub-dropdown-header');
-        const mainHeader = event.target.closest('.dropdown-header');
-
-        if (subHeader) {
-          // Handle sub-dropdown click
+        const header = event.target.closest('.dropdown-header, .sub-dropdown-header');
+        if (header) {
           event.stopPropagation();
-          const subDropdown = subHeader.closest('.sub-dropdown');
-          toggleDropdown(subDropdown, subHeader);
-        } else if (mainHeader) {
-          // Handle main dropdown click
-          const dropdown = mainHeader.closest('.dropdown');
-          toggleDropdown(dropdown, mainHeader);
+          const dropdown = header.closest('.dropdown, .sub-dropdown');
+          toggleDropdown(dropdown, header);
         }
       });
 
-      // Keyboard navigation support
       container.addEventListener('keydown', function(event) {
         if (event.key === 'Enter' || event.key === ' ') {
-          const subHeader = event.target.closest('.sub-dropdown-header');
-          const mainHeader = event.target.closest('.dropdown-header');
-
-          if (subHeader || mainHeader) {
+          if (event.target.matches('.dropdown-header, .sub-dropdown-header')) {
             event.preventDefault();
             event.target.click();
           }
         }
 
-        // Escape key closes all dropdowns
         if (event.key === 'Escape') {
-          document.querySelectorAll('.dropdown.open, .sub-dropdown.open').forEach(function(dropdown) {
-            dropdown.classList.remove('open');
-            const header = dropdown.querySelector('.dropdown-header, .sub-dropdown-header');
-            if (header) {
-              header.setAttribute('aria-expanded', 'false');
-            }
+          document.querySelectorAll('.open').forEach(function(openEl) {
+            const header = openEl.querySelector('.dropdown-header, .sub-dropdown-header');
+            toggleDropdown(openEl, header);
           });
         }
       });
 
-      // Close dropdowns when clicking outside
       document.addEventListener('click', function(event) {
-        if (!event.target.closest('.dropdown')) {
-          document.querySelectorAll('.dropdown.open').forEach(function(dropdown) {
-            dropdown.classList.remove('open');
-            const header = dropdown.querySelector('.dropdown-header');
-            if (header) {
-              header.setAttribute('aria-expanded', 'false');
-            }
-          });
+        if (!event.target.closest('.container')) {
+            document.querySelectorAll('.dropdown.open, .sub-dropdown.open').forEach(function(dropdown) {
+                const header = dropdown.querySelector('.dropdown-header, .sub-dropdown-header');
+                toggleDropdown(dropdown, header);
+            });
         }
-      });
-
-      // Prevent dropdown close when clicking inside dropdown content (but not on headers)
-      container.querySelectorAll('.dropdown').forEach(function(dropdown) {
-        dropdown.addEventListener('click', function(event) {
-          // Only stop propagation if we're not clicking on a header button
-          if (!event.target.closest('.dropdown-header') && !event.target.closest('.sub-dropdown-header')) {
-            event.stopPropagation();
-          }
-        });
       });
     })();
   </script>

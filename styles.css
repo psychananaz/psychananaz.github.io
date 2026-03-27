@@ -1,0 +1,17 @@
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #111;
+  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}

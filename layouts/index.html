@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <style>
+        :root { color-scheme: dark; }
+        body {
+            background-color: #111;
+            color: #f5f5f5;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        a { color: #888; text-decoration: none; }
+        a:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <main>
+        {{ .Content }}
+    </main>
+</body>
+</html>

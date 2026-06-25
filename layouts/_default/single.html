@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <style>
+        :root { color-scheme: dark; }
+        body {
+            background-color: #111;
+            color: #f5f5f5;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 { border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+        a { color: #888; text-decoration: none; }
+        a:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">← Back</a>
+    </header>
+    <main>
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+    </main>
+</body>
+</html>
